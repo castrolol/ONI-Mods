@@ -35,7 +35,7 @@ namespace LuxuryDecoration
 
 			Debug.Log("AnimString = " + AnimString);
 
-			var margin = new RectOffset(4, 4, 4, 4);
+			var margin = new RectOffset(4, 4, 4, 8);
 			var baseLayout = gameObject.GetComponent<BoxLayoutGroup>();
 			if (baseLayout != null)
 				baseLayout.Params = new BoxLayoutParams()
@@ -72,6 +72,7 @@ namespace LuxuryDecoration
 				TextAlignment = TextAnchor.MiddleRight,
 				OnOptionSelected = OnColorSelect,
 				FlexSize = Vector2.right,
+				
 			}.AddOnRealize((obj) => colorsDropDownGo = obj);
 
 
@@ -125,9 +126,27 @@ namespace LuxuryDecoration
 				FlexSize = Vector2.left,
 			}).AddChild(dropdownColor);
 
+			PPanel empty = new PPanel("LuxuryWallSpacerPanel")
+			{
+				FlexSize = Vector2.one,
+				Alignment = TextAnchor.MiddleCenter,
+				Spacing = 10,
+				Direction = PanelDirection.Vertical,
+				Margin = new RectOffset(4, 4, 4, 8),
+				
+			}.AddChild(new PLabel("LuxuryWallTip")
+			{
+				TextAlignment = TextAnchor.MiddleLeft,
+				TextStyle = PUITuning.Fonts.UILightStyle,
+				ToolTip = "",
+				Text = "(Use copy to share the style config)",
+				FlexSize = new Vector2(2f, 1f),
+			});
+
 			iconPanel.AddTo(gameObject);
 			rowType.AddTo(gameObject);
 			rowColor.AddTo(gameObject);
+			empty.AddTo(gameObject);
 
 			ContentContainer = gameObject;
 

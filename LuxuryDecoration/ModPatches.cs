@@ -36,7 +36,7 @@ namespace LuxuryDecoration
 
 				AddStrings(LuxuryWallConfig.ID, LuxuryWallConfig.NAME, LuxuryWallConfig.DESC, LuxuryWallConfig.EFFECT);
 				ModUtil.AddBuildingToPlanScreen("Utilities", LuxuryWallConfig.ID);
-				  Db.Get().Techs.Get("Suits").unlockedItemIDs.Add(LuxuryWallConfig.ID);
+				Db.Get().Techs.Get("Suits").unlockedItemIDs.Add(LuxuryWallConfig.ID);
 
 			}
 

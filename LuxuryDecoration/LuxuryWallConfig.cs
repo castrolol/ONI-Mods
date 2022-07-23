@@ -20,7 +20,7 @@ namespace LuxuryDecoration
 			EffectorValues none1 = NOISE_POLLUTION.NONE;
 			EffectorValues none2 = DECOR.NONE;
 			EffectorValues noise = none1;
-			//BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("LuxuryWall", 1, 1, "luxury_walls", 30, 30f, tieR4, rawMinerals, 1600f, BuildLocationRule.NotInTiles, none2, noise);
+			//BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("LuxuryWall", 1, 1, "luxury_walls_kanim", 30, 30f, tieR4, rawMinerals, 1600f, BuildLocationRule.NotInTiles, none2, noise);
 			BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("LuxuryWall", 1, 1, "luxury_walls_kanim", 30, 1f, new[] { 1f }, rawMinerals, 1600f, BuildLocationRule.NotInTiles, none2, noise);
 			buildingDef.Entombable = false;
 			buildingDef.Floodable = false;
