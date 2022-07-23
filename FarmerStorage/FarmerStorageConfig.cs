@@ -17,20 +17,22 @@ namespace FreeResourceBuildings
 
 		public override BuildingDef CreateBuildingDef()
 		{
-
 			var options = ModBuildingDefs.Instance.GetDefaultOptions(
-				BUILDINGS.CONSTRUCTION_MASS_KG.TIER2,
-				NOISE_POLLUTION.DAMPEN.TIER1,
-				BUILDINGS.DECOR.PENALTY.TIER1,
-				"Plastic",
-				MATERIALS.WOOD
+			  TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER2,
+			  NOISE_POLLUTION.NOISY.TIER4,
+			  TUNING.BUILDINGS.DECOR.PENALTY.TIER2,
+			  "Metal",
+			  MATERIALS.ALL_MINERALS
 			);
 
 			float[] weight = options.Mass;
-			string[] resources = options.Resources;			
+			string[] resources = options.Resources;
 			EffectorValues tieR1 = options.Decor;
 			EffectorValues noise = options.Noise;
 			var time = options.ConstructionTime;
+			var audio = options.AudioCategory;
+
+			 
 
 			BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(ID, 2, 2, "farmerstorage_kanim", 30, time, weight, resources, 1600f, BuildLocationRule.OnFloor, tieR1, noise);
 			buildingDef.Floodable = false;
