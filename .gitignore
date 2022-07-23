@@ -1,3 +1,7 @@
 packages/
 .vs/
+**/packages/
+**/.vs/
+**/bin
+**/obj
 Version.txt
