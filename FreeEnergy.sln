@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeResourceBuildings", "Fr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuxuryDecoration", "LuxuryDecoration\LuxuryDecoration.csproj", "{3C0B46B4-943F-4330-8352-4B010E42B005}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawableDrywall", "DrawableDrywall\DrawableDrywall.csproj", "{B056382F-B0DC-4F1E-B097-C59A7B2460FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3C0B46B4-943F-4330-8352-4B010E42B005}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C0B46B4-943F-4330-8352-4B010E42B005}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C0B46B4-943F-4330-8352-4B010E42B005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B056382F-B0DC-4F1E-B097-C59A7B2460FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B056382F-B0DC-4F1E-B097-C59A7B2460FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B056382F-B0DC-4F1E-B097-C59A7B2460FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B056382F-B0DC-4F1E-B097-C59A7B2460FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

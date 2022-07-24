@@ -22,8 +22,14 @@ namespace FreeResourceBuildings
 
 			base.OnPrefabInit();
 
+			var filters = new List<Tag>();
 
-			storage.storageFilters = STORAGEFILTERS.NOT_EDIBLE_SOLIDS;
+			filters.AddRange(STORAGEFILTERS.NOT_EDIBLE_SOLIDS);
+			filters.AddRange(STORAGEFILTERS.LIQUIDS);
+			filters.AddRange(STORAGEFILTERS.FOOD);
+			filters.AddRange(STORAGEFILTERS.GASES); 
+
+			storage.storageFilters = filters;
 			storage.capacityKg = 999999;
 			this.filteredStorage = new FilteredStorage((KMonoBehaviour)this, (Tag[])null, (Tag[])null, (IUserControlledCapacity)null, false, Db.Get().ChoreTypes.StorageFetch);
 

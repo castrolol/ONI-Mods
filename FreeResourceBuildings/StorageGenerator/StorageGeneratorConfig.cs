@@ -49,19 +49,26 @@ namespace FreeResourceBuildings
             defaultStorage.showInUI = true;
             defaultStorage.allowItemRemoval = true;
 
+            var filters = new List<Tag>();
 
-            defaultStorage.storageFilters = STORAGEFILTERS.NOT_EDIBLE_SOLIDS;
-                         
-			defaultStorage.storageFilters.Remove(GameTags.Seed);
-			defaultStorage.storageFilters.Remove(GameTags.Agriculture); // ok!
-			defaultStorage.storageFilters.Remove(GameTags.MedicalSupplies); // ok
-			defaultStorage.storageFilters.Remove(GameTags.Clothes); // ok
-			defaultStorage.storageFilters.Remove(GameTags.Egg);
+			foreach (var tag in STORAGEFILTERS.NOT_EDIBLE_SOLIDS)
+			{
+                filters.Add(tag);
+			}
+
+
+            filters.Remove(GameTags.Seed);
+			filters.Remove(GameTags.Agriculture); // ok!
+			filters.Remove(GameTags.MedicalSupplies); // ok
+			filters.Remove(GameTags.Clothes); // ok
+			filters.Remove(GameTags.Egg);
+
+            defaultStorage.storageFilters = filters;
 
 			var gen = go.AddOrGet<StorageGenerator>();
             gen.elementCount = 100000;
-            gen.singleItemCount = 100;
-            gen.singleItemPerTick = 10;
+            gen.singleItemCount = 10;
+            gen.singleItemPerTick = 1;
 
         }
 

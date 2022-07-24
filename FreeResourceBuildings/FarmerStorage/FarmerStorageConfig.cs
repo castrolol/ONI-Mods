@@ -61,8 +61,8 @@ namespace FreeResourceBuildings
 		 
 			var gen = go.AddOrGet<FarmerStorage>();
 			gen.elementCount = 100000;
-			gen.singleItemCount = 100;
-			gen.singleItemPerTick = 10;
+			gen.singleItemCount = 10;
+			gen.singleItemPerTick = 1;
 		}
 
 		public override void DoPostConfigureUnderConstruction(GameObject go)

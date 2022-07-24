@@ -26,7 +26,7 @@ namespace FreeResourceBuildings
 		public const string FreeGasSinkID = "FreeGasSink";
 		public const string FreeGasSinkName = "Gas Sink";
 		public const string FreeGasSinkEffect = "A way to vanish unwanted gases";
-		public const string FreeGasSinkDescription = "It allows you to have a sink of liquids\nAll liquids that you send here, will disappear";
+		public const string FreeGasSinkDescription = "It allows you to have a sink of gases\nAll gases that you send here, will disappear";
 
 		public const string StorageGeneratorID = "StorageGenerator";
 		public const string StorageGeneratorName = "Magic Storage";

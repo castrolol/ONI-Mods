@@ -85,15 +85,13 @@ namespace LuxuryDecoration
 				selectedColor = value;
 			}
 
-			Debug.Log($"SetValue({index}, {value})");
-			UpdateAnim();
+ 			UpdateAnim();
 
 		}
 
 
 		private void UpdateAnim()
-		{
-			Debug.Log($"{ Type}_{ Color}");
+		{ 
 			anim.Play($"{Type}_{Color}");
 			UpdateStatics();
 		}

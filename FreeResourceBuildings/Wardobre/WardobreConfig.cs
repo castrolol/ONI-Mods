@@ -58,8 +58,8 @@ namespace FreeResourceBuildings
 
 			var gen = go.AddOrGet<Wardobre>();
 			gen.elementCount = 100000;
-			gen.singleItemCount = 10;
-			gen.singleItemPerTick = 2;
+			gen.singleItemCount = 1;
+			gen.singleItemPerTick = 1;
 		}
 
 		public override void DoPostConfigureUnderConstruction(GameObject go)
