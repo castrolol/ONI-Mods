@@ -127,14 +127,12 @@ public class FreeRadbolt :
 
 	public void DoConsumeParticlesWhileDisabled(float dt)
 	{
-		double num = (double)this.particleStorage.ConsumeAndGet(dt * 1f);
+		//double num = (double)this.particleStorage.ConsumeAndGet(dt * 1f);
 		this.progressMeterController.SetPositionPercent(this.GetProgressBarFillPercentage());
 	}
 
 	public void LauncherUpdate(float dt)
 	{
-
-
 		this.radiationSampleTimer += dt;
 		if ((double)this.radiationSampleTimer >= (double)this.radiationSampleRate)
 		{
@@ -219,7 +217,7 @@ public class FreeRadbolt :
 			default_state = (StateMachine.BaseState)this.inoperational;
 			this.inoperational.PlayAnim("off").TagTransition(GameTags.Operational, (GameStateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.State)this.ready).DefaultState(this.inoperational.empty);
 			this.inoperational.empty.EventTransition(GameHashes.OnParticleStorageChanged, this.inoperational.losing, (StateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.Transition.ConditionCallback)(smi => !smi.GetComponent<HighEnergyParticleStorage>().IsEmpty()));
-			this.inoperational.losing.ToggleStatusItem(Db.Get().BuildingStatusItems.LosingRadbolts).Update((System.Action<FreeRadbolt.StatesInstance, float>)((smi, dt) => smi.master.DoConsumeParticlesWhileDisabled(dt)), UpdateRate.SIM_1000ms).EventTransition(GameHashes.OnParticleStorageChanged, this.inoperational.empty, (StateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.Transition.ConditionCallback)(smi => smi.GetComponent<HighEnergyParticleStorage>().IsEmpty()));
+			//this.inoperational.losing.ToggleStatusItem(Db.Get().BuildingStatusItems.LosingRadbolts).Update((System.Action<FreeRadbolt.StatesInstance, float>)((smi, dt) => smi.master.DoConsumeParticlesWhileDisabled(dt)), UpdateRate.SIM_1000ms).EventTransition(GameHashes.OnParticleStorageChanged, this.inoperational.empty, (StateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.Transition.ConditionCallback)(smi => smi.GetComponent<HighEnergyParticleStorage>().IsEmpty()));
 			this.ready.TagTransition(GameTags.Operational, (GameStateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.State)this.inoperational, true).DefaultState(this.ready.idle).Update((System.Action<FreeRadbolt.StatesInstance, float>)((smi, dt) => smi.master.LauncherUpdate(dt)), UpdateRate.SIM_EVERY_TICK);
 			this.ready.idle.ParamTransition<bool>((StateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.Parameter<bool>)this.isAbsorbingRadiation, this.ready.absorbing, GameStateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.IsTrue).PlayAnim("on");
 			this.ready.absorbing.Enter("SetActive(true)", (StateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.State.Callback)(smi => smi.master.operational.SetActive(true))).Exit("SetActive(false)", (StateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.State.Callback)(smi => smi.master.operational.SetActive(false))).ParamTransition<bool>((StateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.Parameter<bool>)this.isAbsorbingRadiation, this.ready.idle, GameStateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.IsFalse).ToggleStatusItem(CollectingHEP, (Func<FreeRadbolt.StatesInstance, object>)(smi => (object)smi.master)).PlayAnim("working_loop", KAnim.PlayMode.Loop);

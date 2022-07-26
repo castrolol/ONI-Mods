@@ -128,7 +128,7 @@ namespace FreeResourceBuildingsPatches
 					SetTechIfNeeded(FirstAidBoxConfig.ID, "MedicineI", "MedicineIII", "MedicineIV");
 
 				}
-				if (options.UseFreeRadboltSource)
+				if (DlcManager.IsExpansion1Active() && options.UseFreeRadboltSource)
 				{
 					AddStrings(FreeRadboltConfig.ID, FreeRadboltConfig.Name, FreeRadboltConfig.Description, FreeRadboltConfig.Effect);
 					ModUtil.AddBuildingToPlanScreen("HEP", FreeRadboltConfig.ID);

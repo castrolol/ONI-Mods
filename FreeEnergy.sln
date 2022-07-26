@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuxuryDecoration", "LuxuryD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawableDrywall", "DrawableDrywall\DrawableDrywall.csproj", "{B056382F-B0DC-4F1E-B097-C59A7B2460FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreWarps", "MoreWarps\MoreWarps.csproj", "{ED634F24-9B66-42F1-B39B-EBDA1671E770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyzerDoors", "AnalyzerDoors\AnalyzerDoors.csproj", "{47F68ACF-2D42-4188-B03A-5A9543E5AC30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{B056382F-B0DC-4F1E-B097-C59A7B2460FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B056382F-B0DC-4F1E-B097-C59A7B2460FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B056382F-B0DC-4F1E-B097-C59A7B2460FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED634F24-9B66-42F1-B39B-EBDA1671E770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED634F24-9B66-42F1-B39B-EBDA1671E770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED634F24-9B66-42F1-B39B-EBDA1671E770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED634F24-9B66-42F1-B39B-EBDA1671E770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47F68ACF-2D42-4188-B03A-5A9543E5AC30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F68ACF-2D42-4188-B03A-5A9543E5AC30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F68ACF-2D42-4188-B03A-5A9543E5AC30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F68ACF-2D42-4188-B03A-5A9543E5AC30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

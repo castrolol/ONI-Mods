@@ -45,6 +45,8 @@ namespace FreeResourceBuildings
 			//buildingDef.EnergyConsumptionWhenActive = 480f;
 			//buildingDef.ExhaustKilowattsWhenActive = 1f;
 			//buildingDef.SelfHeatKilowattsWhenActive = 4f;
+			buildingDef.LogicInputPorts = LogicOperationalController.CreateSingleInputPortList(new CellOffset(0, 0));
+
 			GeneratedBuildings.RegisterWithOverlay(OverlayScreen.RadiationIDs, "HighEnergyParticleSpawner");
 			buildingDef.Deprecated = !Sim.IsRadiationEnabled();
 			return buildingDef;
@@ -55,6 +57,7 @@ namespace FreeResourceBuildings
 			go.AddOrGet<HighEnergyParticleStorage>().capacity = 500f;
 			go.AddOrGet<LoopingSounds>();
 			go.AddOrGet<RadBoltSilder>();
+			go.AddOrGet<LogicOperationalController>();
 			FreeRadbolt energyParticleSpawner = go.AddOrGet<FreeRadbolt>();
 			energyParticleSpawner.minLaunchInterval = 2f;
 			energyParticleSpawner.radiationSampleRate = 0.2f;
