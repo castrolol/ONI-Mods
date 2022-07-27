@@ -76,6 +76,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MasteryAnalyzerDoorConfig.cs" />
+    <Compile Include="MasteryAnalyzerSideScreen.cs" />
+    <Compile Include="MasteryAnalyzerDoor.cs" />
     <Compile Include="AttributesAnalyzerDoor.cs" />
     <Compile Include="AttributesAnalyzerDoorConfig.cs" />
     <Compile Include="AttributesAnalyzerSideScreen.cs" />

@@ -28,6 +28,7 @@ namespace LuxuryDecoration
 			internal static void Postfix()
 			{
 				PUIUtils.AddSideScreenContent<AttributesAnalyzerSideScreen>();
+				PUIUtils.AddSideScreenContent<MasteryAnalyzerSideScreen>();
 
 			}
 		}
@@ -45,7 +46,7 @@ namespace LuxuryDecoration
 				var sortByNameToggle = sortByNameToggleField.GetValue<Toggle>();
 				var scroll = rowGroup.transform.parent.parent.parent.gameObject;
 				var header = sortByNameToggle.transform.parent.parent.gameObject;
-				if (target.GetComponent<AttributesAnalyzerDoor>() != null)
+				if (target.GetComponent<AttributesAnalyzerDoor>() != null || target.GetComponent<MasteryAnalyzerDoor>() != null)
 				{
 					scroll.SetActive(false);
 					header.SetActive(false);
@@ -71,6 +72,9 @@ namespace LuxuryDecoration
 				ModUtil.AddBuildingToPlanScreen("Base", AttributesAnalyzerDoorConfig.ID);
 				//Db.Get().Techs.Get("Suits").unlockedItemIDs.Add(LuxuryWallConfig.ID);
 
+
+				AddStrings(MasteryAnalyzerDoorConfig.ID, MasteryAnalyzerDoorConfig.NAME, MasteryAnalyzerDoorConfig.DESC, MasteryAnalyzerDoorConfig.EFFECT);
+				ModUtil.AddBuildingToPlanScreen("Base", MasteryAnalyzerDoorConfig.ID);
 			}
 
 			private static void AddStrings(string ID, string Name, string Description, string Effect)
