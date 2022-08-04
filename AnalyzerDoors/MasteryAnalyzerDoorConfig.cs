@@ -8,9 +8,9 @@ namespace AnalyzerDoors
 	public class MasteryAnalyzerDoorConfig : IBuildingConfig
 	{
 		public const string ID = "MasteryDoor";
-		public static string NAME = "Profession's Door";
-		public static string DESC = "Profession's Door works as a common pneumatic door, but you can define filters based on minion's professions";
-		public static string EFFECT = "Allow or disallow duplicants access based on their professions.";
+		public static string NAME = "Skill's Door";
+		public static string DESC = "Skill's Door works as a common pneumatic door, but you can define filters based on dupolicant's skills";
+		public static string EFFECT = "Allow or disallow duplicants access based on their skills.";
 
 
 
@@ -21,7 +21,7 @@ namespace AnalyzerDoors
 			EffectorValues none1 = TUNING.NOISE_POLLUTION.NONE;
 			EffectorValues none2 = TUNING.BUILDINGS.DECOR.NONE;
 			EffectorValues noise = none1;
-			BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("MasteryDoor", 1, 2, "attribute_analyzer_door_kanim", 30, 10f, tieR2, allMetals, 1600f, BuildLocationRule.Tile, none2, noise, 1f);
+			BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("MasteryDoor", 1, 2, "skills_analyzer_door_kanim", 30, 10f, tieR2, allMetals, 1600f, BuildLocationRule.Tile, none2, noise, 1f);
 			buildingDef.Entombable = true;
 			buildingDef.Floodable = false;
 			buildingDef.IsFoundation = false;

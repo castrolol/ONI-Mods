@@ -19,14 +19,20 @@ namespace FreeResourceBuildings
 
 			foreach (EdiblesManager.FoodInfo food in allFood)
 			{
-
-				if ((double)food.CaloriesPerUnit == 0.0)
-					DiscoveredResources.Instance.Discover(food.Id.ToTag(), GameTags.CookingIngredient);
-				else
-					DiscoveredResources.Instance.Discover(food.Id.ToTag(), GameTags.Edible);
+				try
+				{
+					if ((double)food.CaloriesPerUnit == 0.0)
+						DiscoveredResources.Instance.Discover(food.Id.ToTag(), GameTags.CookingIngredient);
+					else
+						DiscoveredResources.Instance.Discover(food.Id.ToTag(), GameTags.Edible);
+				}
+				catch (System.Exception e)
+				{
+					Debug.Log("Unpossible to load " + food.Id);
+				}
 			}
 		}
 
 	}
 }
- 
+

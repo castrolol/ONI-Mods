@@ -12,7 +12,7 @@ namespace AnalyzerDoors
 
 
 	[SerializationConfig(MemberSerialization.OptIn)]
-	public class AttributesAnalyzerDoor : Workable, ISaveLoadable, ISim200ms, ISim1000ms, INavDoor, IGameObjectEffectDescriptor
+	public class AttributesAnalyzerDoor : Workable, ICustomDoor, ISaveLoadable, ISim200ms, ISim1000ms, INavDoor, IGameObjectEffectDescriptor
 	{
 		[MyCmpReq]
 		private Operational operational;
@@ -589,7 +589,9 @@ namespace AnalyzerDoors
 
 				var minionObject = assignablesIdentity.GetTargetGameObject();
 
-				
+
+				if (minionObject.GetMyWorldId() != ClusterManager.Instance.activeWorldId)
+					continue;
 
 				var resume = minionObject.GetComponent<MinionResume>();
 				var identity = minionObject.GetComponent<MinionIdentity>();

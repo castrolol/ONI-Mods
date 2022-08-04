@@ -12,7 +12,7 @@ namespace AnalyzerDoors
 
 
 	[SerializationConfig(MemberSerialization.OptIn)]
-	public class MasteryAnalyzerDoor : Workable, ISaveLoadable, ISim200ms, ISim1000ms, INavDoor, IGameObjectEffectDescriptor
+	public class MasteryAnalyzerDoor : Workable, ISaveLoadable, ICustomDoor, ISim200ms, ISim1000ms, INavDoor, IGameObjectEffectDescriptor
 	{
 		[MyCmpReq]
 		private Operational operational;
@@ -574,24 +574,28 @@ namespace AnalyzerDoors
 
 				var minionObject = assignablesIdentity.GetTargetGameObject();
 
+				if (minionObject.GetMyWorldId() != ClusterManager.Instance.activeWorldId)
+					continue;
+
 				var resume = minionObject.GetComponent<MinionResume>();
 				var identity = minionObject.GetComponent<MinionIdentity>();
 
-				var masteries = resume.MasteryByRoleID;
 
 				var permission = accessControl.DefaultPermission;
 
 				var allowed = true;
 				var orConditions = new List<bool>();
+				var masteries = new List<string>();
 
+				foreach (var skillId in resume.MasteryBySkillID)
+					if (skillId.Value)
+						masteries.Add(skillId.Key);
 
 
 				foreach (var allowedSkill in allowedSkills)
 				{
-					Debug.Log("allowedSkills " + allowedSkills.Count);
 
-					// TODO: tem q ver aquiii!!
-					if (!masteries.ContainsKey(allowedSkill))
+					if (!masteries.Contains(allowedSkill))
 					{
 
 						orConditions.Add(false);

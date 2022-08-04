@@ -38,42 +38,45 @@ namespace FreeResourceBuildings
 
 		private void OnFilterChanged(Tag[] tags)
 		{
-			selectedTags = tags;
-
-			if (tags == null || tags.Length == 0)
+			selectedTags = tags ?? new Tag[] { };
+			var anim = this.GetComponent<KAnimControllerBase>();
+			if (anim)
 			{
-				this.GetComponent<KAnimControllerBase>().Play((HashedString)"off");
-			}
-			else
-			{
-				this.GetComponent<KAnimControllerBase>().Play((HashedString)"on");
+				if (tags == null || tags.Length == 0)
+				{
+					anim.Play((HashedString)"off");
+				}
+				else
+				{
+					anim.Play((HashedString)"on");
+				}
 			}
 
 			var itemsToRemove = new List<UnityEngine.GameObject>();
 			//removing
 			foreach (var item in storage.items)
 			{
-				if (!tags.Any(tag => item.HasTag(tag)))
+				if (item && !selectedTags.Any(tag => item.HasTag(tag)))
 				{
 					itemsToRemove.Add(item);
 				}
 
 			}
 			foreach (var item in itemsToRemove)
-				item.DeleteObject();
+				item?.DeleteObject();
 
-
-			foreach (var tag in tags)
-			{
-				if (!storage.items.Any(item => item.HasTag(tag)))
+			if (storage && storage.items != null)
+				foreach (var tag in tags)
 				{
+					if (!storage.items.Any(item => item.HasTag(tag)))
+					{
 
 
-					var gos = SpawnContents(tag.ToString(), elementCount);
-					foreach(var go in gos) 
-						storage.Store(go);
+						var gos = SpawnContents(tag.ToString(), elementCount);
+						foreach (var go in gos)
+							storage.Store(go);
+					}
 				}
-			}
 
 		}
 
@@ -81,40 +84,46 @@ namespace FreeResourceBuildings
 		{
 
 			List<GameObject> result = new List<GameObject>();
-			GameObject gameObject = (GameObject)null;
-			GameObject prefab = Assets.GetPrefab((Tag)id);
-			Element element = ElementLoader.GetElement(id.ToTag());
-			Vector3 position = this.transform.position + Vector3.up / 2f;
-
-			if (element == null && (Object)prefab != (Object)null)
+			try
 			{
-				for (var i = 0; i < singleItemPerTick; i++)
+				GameObject gameObject = (GameObject)null;
+				GameObject prefab = Assets.GetPrefab((Tag)id);
+				Element element = ElementLoader.GetElement(id.ToTag());
+				Vector3 position = this.transform.position + Vector3.up / 2f;
+
+				if (element == null && (Object)prefab != (Object)null)
 				{
-					gameObject = Util.KInstantiate(prefab, position);
-					if ((Object)gameObject != (Object)null)
+					for (var i = 0; i < singleItemPerTick; i++)
 					{
-						//if (!this.facadeID.IsNullOrWhiteSpace())
-						//	EquippableFacade.AddFacadeToEquippable(gameObject.GetComponent<Equippable>(), this.facadeID);
-						gameObject.SetActive(true);
-						result.Add(gameObject);
+						gameObject = Util.KInstantiate(prefab, position);
+						if ((Object)gameObject != (Object)null)
+						{
+							//if (!this.facadeID.IsNullOrWhiteSpace())
+							//	EquippableFacade.AddFacadeToEquippable(gameObject.GetComponent<Equippable>(), this.facadeID);
+							gameObject.SetActive(true);
+							result.Add(gameObject);
+						}
 					}
+
 				}
+				else if (element != null)
+				{
+
+					gameObject = element.substance.SpawnResource(position, quantity, element.defaultValues.temperature, byte.MaxValue, 0, forceTemperature: true);
+					result.Add(gameObject);
+				}
+				else
+					Debug.LogWarning((object)("Can't find spawnable thing from tag " + id));
+				if (!((Object)gameObject != (Object)null))
+					return null;
+
+				if (gameObject) gameObject.SetActive(true);
 
 			}
-			else if (element != null)
+			catch (System.Exception e)
 			{
-
-				gameObject = element.substance.SpawnResource(position, quantity, element.defaultValues.temperature, byte.MaxValue, 0, forceTemperature: true);
-				result.Add(gameObject);
+				Debug.Log("ERROR SPAWNING ITEM [" + id + "," + quantity + "] (" + e.Message + ")");
 			}
-			else
-				Debug.LogWarning((object)("Can't find spawnable thing from tag " + id));
-			if (!((Object)gameObject != (Object)null))
-				return null;
-
-			if (gameObject) gameObject.SetActive(true);
-
-
 			return result;
 
 

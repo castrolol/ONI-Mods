@@ -38,6 +38,8 @@ namespace LuxuryDecoration
 				ModUtil.AddBuildingToPlanScreen("Utilities", LuxuryWallConfig.ID);
 				Db.Get().Techs.Get("Suits").unlockedItemIDs.Add(LuxuryWallConfig.ID);
 
+			 
+
 			}
 
 			private static void AddStrings(string ID, string Name, string Description, string Effect)

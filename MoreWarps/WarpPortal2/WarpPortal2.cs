@@ -20,15 +20,11 @@ public class WarpPortal2 : Workable
 	public Notifier notifier;
 	private Chore chore;
 	private WarpPortal2.WarpPortal2SM.Instance warpPortalSMI;
-	private Notification notification;
 	public const float RECHARGE_TIME = 3000f;
 	[Serialize]
 	public bool IsConsumed;
 	[Serialize]
 	public float rechargeProgress;
-	[Serialize]
-	private bool discovered;
-	private int selectEventHandle = -1;
 	private Coroutine delayWarpRoutine;
 	private static readonly HashedString[] printing_anim = new HashedString[3]
 	{
@@ -44,6 +40,14 @@ public class WarpPortal2 : Workable
 	protected override void OnPrefabInit()
 	{
 		base.OnPrefabInit();
+		gameObject.GetComponent<WarpPortal2>().workLayer = Grid.SceneLayer.Building;
+		gameObject.GetComponent<Ownable>().slotID = Db.Get().AssignableSlots.WarpPortal.Id;
+		gameObject.GetComponent<OccupyArea>().objectLayers = new ObjectLayer[1]
+		{
+		  ObjectLayer.Building
+		};
+		gameObject.GetComponent<Deconstructable>();
+
 		this.assignable.OnAssign += new System.Action<IAssignableIdentity>(this.Assign);
 	}
 
@@ -53,40 +57,15 @@ public class WarpPortal2 : Workable
 		this.warpPortalSMI = new WarpPortal2.WarpPortal2SM.Instance(this);
 		this.warpPortalSMI.sm.isCharged.Set(!this.IsConsumed, this.warpPortalSMI);
 		this.warpPortalSMI.StartSM();
-		this.selectEventHandle = Game.Instance.Subscribe(-1503271301, new System.Action<object>(this.OnObjectSelected));
 	}
 
-	private void OnObjectSelected(object data)
-	{
-		if (data == null || !((UnityEngine.Object)data == (UnityEngine.Object)this.gameObject) || Components.LiveMinionIdentities.Count <= 0)
-			return;
-		this.Discover();
-	}
+
 
 	protected override void OnCleanUp()
 	{
-		Game.Instance.Unsubscribe(this.selectEventHandle);
 		base.OnCleanUp();
 	}
 
-	private void Discover()
-	{
-		if (this.discovered)
-			return;
-		ClusterManager.Instance.GetWorld(this.GetTargetWorldID()).SetDiscovered(true);
-		SimpleEvent.StatesInstance smi = GameplayEventManager.Instance.StartNewEvent(Db.Get().GameplayEvents.WarpWorldReveal).smi as SimpleEvent.StatesInstance;
-		smi.minions = new GameObject[1]
-		{
-	  Components.LiveMinionIdentities[0].gameObject
-		};
-		smi.callback = (System.Action)(() =>
-		{
-			ManagementMenu.Instance.OpenClusterMap();
-			ClusterMapScreen.Instance.SetTargetFocusPosition(ClusterManager.Instance.GetWorld(this.GetTargetWorldID()).GetMyWorldLocation());
-		});
-		smi.ShowEventPopup((object)this.GetTargetWorldID());
-		this.discovered = true;
-	}
 
 	public void StartWarpSequence() => this.warpPortalSMI.GoTo((StateMachine.BaseState)this.warpPortalSMI.sm.occupied.warping);
 
@@ -97,61 +76,49 @@ public class WarpPortal2 : Workable
 		this.warpPortalSMI.GoTo((StateMachine.BaseState)this.warpPortalSMI.sm.idle);
 	}
 
-	private int GetTargetWorldID()
-	{
-		SaveGame.Instance.GetComponent<WorldGenSpawner>().SpawnTag(WarpReceiver2Config.ID);
-		foreach (WarpReceiver2 component in UnityEngine.Object.FindObjectsOfType<WarpReceiver2>())
-		{
-			if (component.GetMyWorldId() != this.GetMyWorldId())
-				return component.GetMyWorldId();
-		}
-		Debug.LogError((object)"No receiver world found for warp portal sender");
-		return -1;
-	}
-
 	private void Warp()
 	{
-		if ((UnityEngine.Object)this.worker == (UnityEngine.Object)null || this.worker.HasTag(GameTags.Dying) || this.worker.HasTag(GameTags.Dead))
-			return;
-		WarpReceiver2 receiver = (WarpReceiver2)null;
-		foreach (WarpReceiver2 component in UnityEngine.Object.FindObjectsOfType<WarpReceiver2>())
-		{
-			if (component.GetMyWorldId() != this.GetMyWorldId())
-			{
-				receiver = component;
-				break;
-			}
-		}
-		if ((UnityEngine.Object)receiver == (UnityEngine.Object)null)
-		{
-			SaveGame.Instance.GetComponent<WorldGenSpawner>().SpawnTag(WarpReceiver2Config.ID);
-			receiver = UnityEngine.Object.FindObjectOfType<WarpReceiver2>();
-		}
-		if ((UnityEngine.Object)receiver != (UnityEngine.Object)null)
-			this.delayWarpRoutine = this.StartCoroutine(this.DelayedWarp(receiver));
-		else
-			Debug.LogWarning((object)"No warp receiver found - maybe POI stomping or failure to spawn?");
-		if (!((UnityEngine.Object)SelectTool.Instance.selected == (UnityEngine.Object)this.GetComponent<KSelectable>()))
-			return;
-		SelectTool.Instance.Select((KSelectable)null, true);
+		//if ((UnityEngine.Object)this.worker == (UnityEngine.Object)null || this.worker.HasTag(GameTags.Dying) || this.worker.HasTag(GameTags.Dead))
+		//	return;
+		//WarpReceiver2 receiver = (WarpReceiver2)null;
+		//foreach (WarpReceiver2 component in UnityEngine.Object.FindObjectsOfType<WarpReceiver2>())
+		//{
+		//	if (component.GetMyWorldId() != this.GetMyWorldId())
+		//	{
+		//		receiver = component;
+		//		break;
+		//	}
+		//}
+		//if ((UnityEngine.Object)receiver == (UnityEngine.Object)null)
+		//{
+		//	SaveGame.Instance.GetComponent<WorldGenSpawner>().SpawnTag(WarpReceiver2Config.ID);
+		//	receiver = UnityEngine.Object.FindObjectOfType<WarpReceiver2>();
+		//}
+		//if ((UnityEngine.Object)receiver != (UnityEngine.Object)null)
+		//	this.delayWarpRoutine = this.StartCoroutine(this.DelayedWarp(receiver));
+		//else
+		//	Debug.LogWarning((object)"No warp receiver found - maybe POI stomping or failure to spawn?");
+		//if (!((UnityEngine.Object)SelectTool.Instance.selected == (UnityEngine.Object)this.GetComponent<KSelectable>()))
+		//	return;
+		//SelectTool.Instance.Select((KSelectable)null, true);
 	}
 
-	public IEnumerator DelayedWarp(WarpReceiver2 receiver)
-	{
-		// ISSUE: reference to a compiler-generated field
-		WarpPortal2 WarpPortal2 = this;
-		Debug.Log("TENTOU");
-		yield return null;
+	//public IEnumerator DelayedWarp(WarpReceiver2 receiver)
+	//{
+	//	// ISSUE: reference to a compiler-generated field
+	//	//WarpPortal2 WarpPortal2 = this;
+	//	//Debug.Log("TENTOU");
+	//	//yield return null;
 
-		int myWorldId = receiver.GetMyWorldId();
-		CameraController.Instance.ActiveWorldStarWipe(myWorldId, Grid.CellToPos(Grid.PosToCell((KMonoBehaviour)receiver)));
-		Worker worker = WarpPortal2.worker;
-		worker.StopWork();
-		receiver.ReceiveWarpedDuplicant(worker);
-		ClusterManager.Instance.MigrateMinion(worker.GetComponent<MinionIdentity>(), myWorldId);
-		WarpPortal2.delayWarpRoutine = (Coroutine)null;
+	//	//int myWorldId = receiver.GetMyWorldId();
+	//	//CameraController.Instance.ActiveWorldStarWipe(myWorldId, Grid.CellToPos(Grid.PosToCell((KMonoBehaviour)receiver)));
+	//	//Worker worker = WarpPortal2.worker;
+	//	//worker.StopWork();
+	//	//receiver.ReceiveWarpedDuplicant(worker);
+	//	//ClusterManager.Instance.MigrateMinion(worker.GetComponent<MinionIdentity>(), myWorldId);
+	//	//WarpPortal2.delayWarpRoutine = (Coroutine)null;
 
-	}
+	//}
 
 	public void SetAssignable(bool set_it)
 	{
@@ -169,8 +136,10 @@ public class WarpPortal2 : Workable
 
 	private void ActivateChore()
 	{
+
 		Debug.Assert(this.chore == null);
 		this.chore = (Chore)new WorkChore<Workable>(Db.Get().ChoreTypes.Migrate, (IStateMachineTarget)this, on_complete: ((System.Action<Chore>)(o => this.CompleteChore())), override_anims: Assets.GetAnim((HashedString)"anim_interacts_warp_portal_sender_kanim"), allow_prioritization: false, priority_class: PriorityScreen.PriorityClass.high);
+		Debug.Log("this.chore.id" + this.chore.id);
 		this.SetWorkTime(float.PositiveInfinity);
 		this.workLayer = Grid.SceneLayer.Building;
 		this.workAnims = new HashedString[2]

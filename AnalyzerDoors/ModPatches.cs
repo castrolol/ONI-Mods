@@ -33,6 +33,8 @@ namespace LuxuryDecoration
 			}
 		}
 
+
+		 
 		[HarmonyPatch(typeof(AccessControlSideScreen), "SetTarget")]
 		public static class AccessControlSideScreen_SetTarget
 		{
@@ -70,11 +72,12 @@ namespace LuxuryDecoration
 
 				AddStrings(AttributesAnalyzerDoorConfig.ID, AttributesAnalyzerDoorConfig.NAME, AttributesAnalyzerDoorConfig.DESC, AttributesAnalyzerDoorConfig.EFFECT);
 				ModUtil.AddBuildingToPlanScreen("Base", AttributesAnalyzerDoorConfig.ID);
-				//Db.Get().Techs.Get("Suits").unlockedItemIDs.Add(LuxuryWallConfig.ID);
+				Db.Get().Techs.Get("DirectedAirStreams").unlockedItemIDs.Add(AttributesAnalyzerDoorConfig.ID);
 
 
 				AddStrings(MasteryAnalyzerDoorConfig.ID, MasteryAnalyzerDoorConfig.NAME, MasteryAnalyzerDoorConfig.DESC, MasteryAnalyzerDoorConfig.EFFECT);
 				ModUtil.AddBuildingToPlanScreen("Base", MasteryAnalyzerDoorConfig.ID);
+				Db.Get().Techs.Get("DirectedAirStreams").unlockedItemIDs.Add(MasteryAnalyzerDoorConfig.ID);
 			}
 
 			private static void AddStrings(string ID, string Name, string Description, string Effect)

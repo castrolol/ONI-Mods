@@ -107,6 +107,15 @@ namespace FreeResourceBuildingsPatches
 					SetTechIfNeeded(FreeLiquidSourceConfig.ID, "LiquidPiping", "LiquidDistribution", "AdvancedSanitation");
 
 				}
+
+				if (options.UseMagicFeeder)
+				{
+					AddStrings(MagicFeederConfig.ID, MagicFeederConfig.Name, MagicFeederConfig.Description, MagicFeederConfig.Effect);
+					ModUtil.AddBuildingToPlanScreen("Food", MagicFeederConfig.ID);
+					SetTechIfNeeded(MagicFeederConfig.ID, "Ranching", "FoodRepurposing", "FinerDining");
+
+				}
+
 				if (options.UseMagicWardobre)
 				{
 					AddStrings(WardobreConfig.ID, WardobreConfig.Name, WardobreConfig.Description, WardobreConfig.Effect);

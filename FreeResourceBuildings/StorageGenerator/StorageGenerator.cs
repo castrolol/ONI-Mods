@@ -33,17 +33,23 @@ namespace FreeResourceBuildings
 			};
 			foreach (var id in ids)
 			{
-				var prefab = Assets.GetPrefab(id);
-				if (prefab == null) continue;
-				var item = Util.KInstantiate(prefab);
-				if (item == null) continue;
-				var prefabId = item.GetComponent<KPrefabID>();
-				if (prefabId == null) continue;
+				try
+				{
+					var prefab = Assets.GetPrefab(id);
+					if (prefab == null) continue;
+					var item = Util.KInstantiate(prefab);
+					if (item == null) continue;
+					var prefabId = item.GetComponent<KPrefabID>();
+					if (prefabId == null) continue;
 
 
-				var category = DiscoveredResources.GetCategoryForEntity(prefabId);
+					var category = DiscoveredResources.GetCategoryForEntity(prefabId);
 
-				DiscoveredResources.Instance.Discover(prefabId.PrefabTag, category);
+					DiscoveredResources.Instance.Discover(prefabId.PrefabTag, category);
+				}catch(System.Exception e)
+				{
+					Debug.Log("Unpossible to load " + id);
+				}
 			}
 
 			

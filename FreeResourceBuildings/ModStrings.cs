@@ -33,6 +33,12 @@ namespace FreeResourceBuildings
 		public const string StorageGeneratorEffect = "Keep generating a generous amount of selected items";
 		public const string StorageGeneratorDescription = "It provides you a free source of items, mark collect only to avoid of loose your other items";
 
+		public const string MagicFeederID = "MagicFeeder";
+		public const string MagicFeederName = "Magic Feeder";
+		public const string MagicFeederEffect = "Keep generating a generous amount food for your critter";
+		public const string MagicFeederDescription = "It provides you a free source of food for critters, mark collect only to avoid of loose your other items";
+
+
 		public const string FoodStorageGeneratorID = "FoodStorageGenerator";
 		public const string FoodStorageGeneratorName = "Magic Refrigerator";
 		public const string FoodStorageGeneratorEffect = "Keep generating a generous amount of selected food";

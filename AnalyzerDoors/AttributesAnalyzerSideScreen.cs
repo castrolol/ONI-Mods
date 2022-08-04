@@ -419,10 +419,10 @@ namespace AnalyzerDoors
 
 				}
 
-
+				PComboBox<ConditionTypeItem>.SetSelectedItem(dropdown, (ConditionTypeItem)condition.condition);
 
 				COLOR_STYLE_SETTING.Set(kImage, style);
-
+				kImage.ApplyColorStyleSetting();
 			}
 
 			public void RefreshField()
@@ -435,7 +435,7 @@ namespace AnalyzerDoors
 				}
 
 				field.SetActive(true);
-
+				field.GetComponent<TMPro.TMP_InputField>().text = condition.amount.ToString();
 
 			}
 

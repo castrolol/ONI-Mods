@@ -76,6 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICustomDoor.cs" />
     <Compile Include="MasteryAnalyzerDoorConfig.cs" />
     <Compile Include="MasteryAnalyzerSideScreen.cs" />
     <Compile Include="MasteryAnalyzerDoor.cs" />

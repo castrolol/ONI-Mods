@@ -29,15 +29,21 @@ namespace FreeResourceBuildings
 
 			foreach (var tag in tags)
 			{
-				var prefab = tag.Prefab();
-				if (prefab != null)
+				try
 				{
-					Tag categoryForEntity = DiscoveredResources.GetCategoryForEntity(prefab.GetComponent<KPrefabID>());
-					DiscoveredResources.Instance.Discover(tag, categoryForEntity);
+					var prefab = tag.Prefab();
+					if (prefab != null)
+					{
+						Tag categoryForEntity = DiscoveredResources.GetCategoryForEntity(prefab.GetComponent<KPrefabID>());
+						DiscoveredResources.Instance.Discover(tag, categoryForEntity);
+					}
 				}
-
+				catch (System.Exception e)
+				{
+					Debug.Log("Unpossible to load ");
+				}
 			}
-			 
+
 		}
 	}
 }

@@ -76,6 +76,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomWarp.cs" />
+    <Compile Include="CustomWarpConfig.cs" />
+    <Compile Include="CustomWarpWorkable.cs" />
     <Compile Include="ModPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ModBuildingStatus.cs" />

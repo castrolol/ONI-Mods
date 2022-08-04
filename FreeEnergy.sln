@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreWarps", "MoreWarps\More
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyzerDoors", "AnalyzerDoors\AnalyzerDoors.csproj", "{47F68ACF-2D42-4188-B03A-5A9543E5AC30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WallPedestal", "WallPedestal\WallPedestal.csproj", "{DDF42690-EB7E-4317-B636-70E2E02CFB4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrittersCanPass", "CrittersCanPass\CrittersCanPass.csproj", "{4B35EB71-2358-436A-891C-FB8526976877}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{47F68ACF-2D42-4188-B03A-5A9543E5AC30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47F68ACF-2D42-4188-B03A-5A9543E5AC30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47F68ACF-2D42-4188-B03A-5A9543E5AC30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDF42690-EB7E-4317-B636-70E2E02CFB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF42690-EB7E-4317-B636-70E2E02CFB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF42690-EB7E-4317-B636-70E2E02CFB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF42690-EB7E-4317-B636-70E2E02CFB4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B35EB71-2358-436A-891C-FB8526976877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B35EB71-2358-436A-891C-FB8526976877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B35EB71-2358-436A-891C-FB8526976877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B35EB71-2358-436A-891C-FB8526976877}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

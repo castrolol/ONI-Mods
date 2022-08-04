@@ -22,16 +22,24 @@ namespace FreeResourceBuildings
 
 			foreach (var egg in eggs)
 			{
-				var prefabId = egg.GetComponent<KPrefabID>();
-				if (prefabId != null && egg.HasTag(GameTags.Egg))
+				try
 				{
-					var eggTag = (Tag)"PuftEgg";
-					foreach (var tag in prefabId.Tags)
-						if (tag.ToString().EndsWith("Egg") && tag != GameTags.IncubatableEgg && tag.ToString().Length > 3)
-							eggTag = tag;
+					var prefabId = egg.GetComponent<KPrefabID>();
+					if (prefabId != null && egg.HasTag(GameTags.Egg))
+					{
 
-					Tag categoryForEntity = DiscoveredResources.GetCategoryForTags(prefabId.Tags);
-					DiscoveredResources.Instance.Discover(eggTag, categoryForEntity);
+						var eggTag = (Tag)"PuftEgg";
+						foreach (var tag in prefabId.Tags)
+							if (tag.ToString().EndsWith("Egg") && tag != GameTags.IncubatableEgg && tag.ToString().Length > 3)
+								eggTag = tag;
+
+						Tag categoryForEntity = DiscoveredResources.GetCategoryForTags(prefabId.Tags);
+						DiscoveredResources.Instance.Discover(eggTag, categoryForEntity);
+					}
+				}
+				catch (System.Exception e)
+				{
+					Debug.Log("Unpossible to load " + egg);
 				}
 			}
 			foreach (var element in ElementLoader.elements)
@@ -57,16 +65,22 @@ namespace FreeResourceBuildings
 
 			foreach (var seed in seeds)
 			{
+				try
+				{
+					var prefabId = seed.GetComponent<KPrefabID>();
 
-				var prefabId = seed.GetComponent<KPrefabID>();
-				
-				var seedTag = (Tag)"OxyfernSeed";
-				foreach (var tag in prefabId.Tags)
-					if (tag.ToString().EndsWith("Seed") && !excludedTags.Contains(tag))
-						seedTag = tag;
+					var seedTag = (Tag)"OxyfernSeed";
+					foreach (var tag in prefabId.Tags)
+						if (tag.ToString().EndsWith("Seed") && !excludedTags.Contains(tag))
+							seedTag = tag;
 
-				Tag categoryForEntity = DiscoveredResources.GetCategoryForTags(prefabId.Tags);
-				DiscoveredResources.Instance.Discover(seedTag, categoryForEntity);
+					Tag categoryForEntity = DiscoveredResources.GetCategoryForTags(prefabId.Tags);
+					DiscoveredResources.Instance.Discover(seedTag, categoryForEntity);
+				}
+				catch (System.Exception e)
+				{
+					Debug.Log("Unpossible to load " + seed);
+				}
 			}
 
 

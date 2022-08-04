@@ -41,6 +41,9 @@ namespace FreeResourceBuildings
 		[Option("Allows MagicWardobre", "If checked, you can build Magic Wardobre ")]
 		public bool UseMagicWardobre { set; get; }
 
+		[Option("Allows MagicFeeder", "If checked, you can build Magic Feeder ")]
+		public bool UseMagicFeeder { set; get; }
+
 		[Option("Allows Trashcan", "If checked, you can build Trashcan ")]
 		public bool UseTrashcan { set; get; }
 
@@ -59,6 +62,7 @@ namespace FreeResourceBuildings
 			UseMagicRefrigerator = true;
 			UseMagicWardobre = true;
 			UseTrashcan = true;
+			UseMagicFeeder = true;
 
 		}
 	}
