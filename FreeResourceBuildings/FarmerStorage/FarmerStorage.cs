@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeResourceBuildingsPatches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,43 +17,44 @@ namespace FreeResourceBuildings
 		{
 			base.OnSpawn();
 
-
-			List<GameObject> eggs = Assets.GetPrefabsWithTag(GameTags.IncubatableEgg);
-
-
-			foreach (var egg in eggs)
+			if (Mod.Options.DiscoverAllUsableItems)
 			{
-				try
+				List<GameObject> eggs = Assets.GetPrefabsWithTag(GameTags.IncubatableEgg);
+
+
+				foreach (var egg in eggs)
 				{
-					var prefabId = egg.GetComponent<KPrefabID>();
-					if (prefabId != null && egg.HasTag(GameTags.Egg))
+					try
 					{
+						var prefabId = egg.GetComponent<KPrefabID>();
+						if (prefabId != null && egg.HasTag(GameTags.Egg))
+						{
 
-						var eggTag = (Tag)"PuftEgg";
-						foreach (var tag in prefabId.Tags)
-							if (tag.ToString().EndsWith("Egg") && tag != GameTags.IncubatableEgg && tag.ToString().Length > 3)
-								eggTag = tag;
+							var eggTag = (Tag)"PuftEgg";
+							foreach (var tag in prefabId.Tags)
+								if (tag.ToString().EndsWith("Egg") && tag != GameTags.IncubatableEgg && tag.ToString().Length > 3)
+									eggTag = tag;
 
-						Tag categoryForEntity = DiscoveredResources.GetCategoryForTags(prefabId.Tags);
-						DiscoveredResources.Instance.Discover(eggTag, categoryForEntity);
+							Tag categoryForEntity = DiscoveredResources.GetCategoryForTags(prefabId.Tags);
+							DiscoveredResources.Instance.Discover(eggTag, categoryForEntity);
+						}
+					}
+					catch (System.Exception e)
+					{
+						Debug.Log("Unpossible to load " + egg);
 					}
 				}
-				catch (System.Exception e)
+				foreach (var element in ElementLoader.elements)
 				{
-					Debug.Log("Unpossible to load " + egg);
+					if (element.materialCategory == GameTags.Agriculture)
+					{
+						var tag = element.id.CreateTag();
+						Tag categoryForEntity = DiscoveredResources.GetCategoryForEntity(tag.Prefab().GetComponent<KPrefabID>());
+						DiscoveredResources.Instance.Discover(element.id.CreateTag(), categoryForEntity);
+					}
 				}
-			}
-			foreach (var element in ElementLoader.elements)
-			{
-				if (element.materialCategory == GameTags.Agriculture)
-				{
-					var tag = element.id.CreateTag();
-					Tag categoryForEntity = DiscoveredResources.GetCategoryForEntity(tag.Prefab().GetComponent<KPrefabID>());
-					DiscoveredResources.Instance.Discover(element.id.CreateTag(), categoryForEntity);
-				}
-			}
 
-			var excludedTags = new List<Tag> {
+				var excludedTags = new List<Tag> {
 				GameTags.Seed,
 				GameTags.UnidentifiedSeed ,
 				GameTags.CropSeed ,
@@ -61,28 +63,28 @@ namespace FreeResourceBuildings
 				GameTags.MutatedSeed ,
 			};
 
-			var seeds = Assets.GetPrefabsWithTag(GameTags.Seed);
+				var seeds = Assets.GetPrefabsWithTag(GameTags.Seed);
 
-			foreach (var seed in seeds)
-			{
-				try
+				foreach (var seed in seeds)
 				{
-					var prefabId = seed.GetComponent<KPrefabID>();
+					try
+					{
+						var prefabId = seed.GetComponent<KPrefabID>();
 
-					var seedTag = (Tag)"OxyfernSeed";
-					foreach (var tag in prefabId.Tags)
-						if (tag.ToString().EndsWith("Seed") && !excludedTags.Contains(tag))
-							seedTag = tag;
+						var seedTag = (Tag)"OxyfernSeed";
+						foreach (var tag in prefabId.Tags)
+							if (tag.ToString().EndsWith("Seed") && !excludedTags.Contains(tag))
+								seedTag = tag;
 
-					Tag categoryForEntity = DiscoveredResources.GetCategoryForTags(prefabId.Tags);
-					DiscoveredResources.Instance.Discover(seedTag, categoryForEntity);
-				}
-				catch (System.Exception e)
-				{
-					Debug.Log("Unpossible to load " + seed);
+						Tag categoryForEntity = DiscoveredResources.GetCategoryForTags(prefabId.Tags);
+						DiscoveredResources.Instance.Discover(seedTag, categoryForEntity);
+					}
+					catch (System.Exception e)
+					{
+						Debug.Log("Unpossible to load " + seed);
+					}
 				}
 			}
-
 
 		}
 

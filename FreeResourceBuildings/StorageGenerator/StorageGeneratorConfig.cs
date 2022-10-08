@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeResourceBuildingsPatches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,8 +67,9 @@ namespace FreeResourceBuildings
             defaultStorage.storageFilters = filters;
 
 			var gen = go.AddOrGet<StorageGenerator>();
-            gen.elementCount = 100000;
-            gen.singleItemCount = 10;
+            var modOptions = Mod.Options;
+            gen.elementCount = modOptions.freeStorageElementsLimit;
+            gen.singleItemCount = modOptions.freeStorageItemsLimit;
             gen.singleItemPerTick = 1;
 
         }

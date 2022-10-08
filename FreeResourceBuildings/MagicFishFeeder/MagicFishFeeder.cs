@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace FreeResourceBuildings
 {
-	public class MagicFeeder : FreeStorage
+	public class MagicFishFeeder : FreeStorage
 	{
 		protected override void OnSpawn()
 		{
@@ -17,15 +17,10 @@ namespace FreeResourceBuildings
 			if (Mod.Options.DiscoverAllUsableItems)
 			{
 				List<Tag> tagList = new List<Tag>();
-				Tag[] target_species = new Tag[6]
-				{
-				  GameTags.Creatures.Species.LightBugSpecies,
-				  GameTags.Creatures.Species.HatchSpecies,
-				  GameTags.Creatures.Species.MoleSpecies,
-				  GameTags.Creatures.Species.CrabSpecies,
-				  GameTags.Creatures.Species.StaterpillarSpecies,
-				  GameTags.Creatures.Species.DivergentSpecies
-				};
+				Tag[] target_species = new Tag[1]
+				   {
+					  GameTags.Creatures.Species.PacuSpecies
+				   };
 
 				foreach (KeyValuePair<Tag, Diet> collectDiet in DietManager.CollectDiets(target_species))
 					tagList.Add(collectDiet.Key);

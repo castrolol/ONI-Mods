@@ -1,4 +1,5 @@
-﻿using KSerialization;
+﻿using FreeResourceBuildingsPatches;
+using KSerialization;
 using STRINGS;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace FreeResourceBuildings
 
 		[SerializeField]
 		[Serialize]
-		public float currentCapacity = 2000;
+		public float currentCapacity = Mod.Options.defaultEnergyWattage;
 		[MyCmpGet]
 		private OccupyArea occupyArea;
 		public override float Capacity => currentCapacity;
@@ -41,9 +42,27 @@ namespace FreeResourceBuildings
 		protected static readonly IntraObjectHandler<FreeEnergyGenerator> OnActivateChangeDelegate = new IntraObjectHandler<FreeEnergyGenerator>(OnActivateChangedStatic);
 		private static readonly Func<int, object, bool> UpdateStateCbDelegate = (Func<int, object, bool>)((cell, data) => FreeEnergyGenerator.UpdateStateCb(cell, data));
 
-		public string SliderTitleKey => "Não Sei";
+		public string SliderTitleKey => "-";
 
 		public string SliderUnits => UI.UNITSUFFIXES.ELECTRICAL.WATT;
+		[MyCmpAdd]
+		private CopyBuildingSettings copyBuildingSettings;
+		private static readonly EventSystem.IntraObjectHandler<FreeEnergyGenerator> OnCopySettingsDelegate = new EventSystem.IntraObjectHandler<FreeEnergyGenerator>((System.Action<FreeEnergyGenerator, object>)((component, data) => component.OnCopySettings(data)));
+
+		protected override void OnPrefabInit()
+		{
+			base.OnPrefabInit();
+			this.Subscribe<FreeEnergyGenerator>(-905833192, FreeEnergyGenerator.OnCopySettingsDelegate);
+
+		}
+
+		private void OnCopySettings(object data)
+		{
+			FreeEnergyGenerator component = ((GameObject)data).GetComponent<FreeEnergyGenerator>();
+			if (!((UnityEngine.Object)component != (UnityEngine.Object)null))
+				return;
+			this.currentCapacity = component.currentCapacity;
+		}
 
 		private static void OnActivateChangedStatic(FreeEnergyGenerator gen, object data) =>
 		  gen.OnActivateChanged(data as Operational);

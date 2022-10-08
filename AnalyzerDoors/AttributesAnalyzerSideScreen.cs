@@ -42,8 +42,27 @@ namespace AnalyzerDoors
 					Alignment = TextAnchor.UpperCenter,
 					Spacing = 8
 				};
-
+			
 			var typePanel = CreateConditionModeUI();
+
+			var checkboxPanel = new PPanel("AttributesAnalyzerCheckPanel")
+			{
+				FlexSize = Vector2.one,
+				Margin = new RectOffset(4, 4, 4, 4),
+				Direction = PanelDirection.Horizontal,
+			};
+
+			checkboxPanel.AddChild(new PCheckBox("AttributesAnalyzerSideCheckbox")
+			{
+				ToolTip = "Should consider the base attribute or both base and bonus",
+				FlexSize = Vector2.one,
+				Text = "Use only base value",
+				TextStyle = PUITuning.Fonts.UIDarkStyle,
+				TextAlignment = TextAnchor.MiddleLeft,
+				InitialState = source.config.isBaseValue ? 1 : 0,
+				OnChecked = OnBaseCheckboxChange
+			});
+
 
 			var attributesPanel = new PGridPanel("AttributesAnalyzerSideScreen")
 			{
@@ -82,6 +101,7 @@ namespace AnalyzerDoors
 			}
 
 			typePanel.AddTo(gameObject);
+			checkboxPanel.AddTo(gameObject);
 			attributesPanel.AddTo(gameObject);
 
 			ContentContainer = gameObject;
@@ -131,6 +151,8 @@ namespace AnalyzerDoors
 				Direction = PanelDirection.Horizontal,
 			};
 
+			
+
 			var andPanel = new PPanel("AttributesAnalyzerPanelAND")
 			{
 				FlexSize = Vector2.one,
@@ -145,6 +167,7 @@ namespace AnalyzerDoors
 				Direction = PanelDirection.Horizontal,
 			};
 
+			
 
 
 			andPanel.AddChild(new PButton("AttributesAnalyzerSideAND")
@@ -175,8 +198,18 @@ namespace AnalyzerDoors
 
 			typePanel.AddChild(andPanel);
 			typePanel.AddChild(orPanel);
+			
 
 			return typePanel;
+
+		}
+
+		private void OnBaseCheckboxChange(GameObject target, int state)
+		{
+
+			source.config.isBaseValue = state == 1;
+		
+			PCheckBox.SetCheckState(target, state == 1 ? 0 : 1);
 
 		}
 

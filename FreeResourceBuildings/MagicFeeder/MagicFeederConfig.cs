@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeResourceBuildingsPatches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,7 @@ namespace FreeResourceBuildings
 		public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)
 		{
 			Prioritizable.AddRef(go);
-			go.GetComponent<KPrefabID>().AddTag(RoomConstraints.ConstraintTags.CreatureFeeder);
+		//	go.GetComponent<KPrefabID>().AddTag(RoomConstraints.ConstraintTags.CreatureFeeder);
 			Storage storage = go.AddOrGet<Storage>();
 			storage.capacityKg = 2000f;
 			storage.showInUI = true;
@@ -55,10 +56,15 @@ namespace FreeResourceBuildings
 			storage.showCapacityStatusItem = true;
 			storage.showCapacityAsMainStatus = true;
 			go.AddOrGet<StorageLocker>().choreTypeID = Db.Get().ChoreTypes.RanchingFetch.Id;
-			go.AddOrGet<FreeStorage>();
+			var gen = go.AddOrGet<FreeStorage>();
 			go.AddOrGet<UserNameable>();
 			go.AddOrGet<TreeFilterable>();
 			go.AddOrGet<CreatureFeeder>();
+
+			var modOptions = Mod.Options;
+			gen.elementCount = modOptions.magicFeederElementsLimit;
+			gen.singleItemCount = modOptions.magicFeederItemsLimit;
+			gen.singleItemPerTick = 1;
 		}
 
 		public override void DoPostConfigureComplete(GameObject go) => go.AddOrGetDef<StorageController.Def>();

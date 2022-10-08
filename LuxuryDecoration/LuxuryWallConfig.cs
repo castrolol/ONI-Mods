@@ -15,22 +15,31 @@ namespace LuxuryDecoration
 
 		public override BuildingDef CreateBuildingDef()
 		{
-			float[] tieR4 = BUILDINGS.CONSTRUCTION_MASS_KG.TIER4;
-			string[] rawMinerals = MATERIALS.RAW_MINERALS;
-			EffectorValues none1 = NOISE_POLLUTION.NONE;
-			EffectorValues none2 = DECOR.NONE;
-			EffectorValues noise = none1;
-			//BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("LuxuryWall", 1, 1, "luxury_walls_kanim", 30, 30f, tieR4, rawMinerals, 1600f, BuildLocationRule.NotInTiles, none2, noise);
-			BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("LuxuryWall", 1, 1, "luxury_walls_kanim", 30, 1f, new[] { 1f }, rawMinerals, 1600f, BuildLocationRule.NotInTiles, none2, noise);
-			buildingDef.Entombable = false;
-			buildingDef.Floodable = false;
-			buildingDef.Overheatable = false;
-			buildingDef.AudioCategory = "Metal";
-			buildingDef.AudioSize = "small";
-			buildingDef.BaseTimeUntilRepair = -1f;
-			buildingDef.DefaultAnimState = "mosaic_white";
-			buildingDef.ObjectLayer = ObjectLayer.Backwall;
-			buildingDef.SceneLayer = Grid.SceneLayer.Backwall;
+			//float[] tieR4 = BUILDINGS.CONSTRUCTION_MASS_KG.TIER4;
+			//string[] rawMinerals = MATERIALS.RAW_MINERALS;
+			//EffectorValues none1 = NOISE_POLLUTION.NONE;
+			//EffectorValues none2 = DECOR.NONE;
+			//EffectorValues noise = none1;
+			////BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("LuxuryWall", 1, 1, "luxury_walls_kanim", 30, 30f, tieR4, rawMinerals, 1600f, BuildLocationRule.NotInTiles, none2, noise);
+			//BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("LuxuryWall", 1, 1, "luxury_walls_kanim", 30, 1f, new[] { 1f }, rawMinerals, 1600f, BuildLocationRule.NotInTiles, none2, noise);
+			//buildingDef.Entombable = false;
+			//buildingDef.Floodable = false;
+			//buildingDef.Overheatable = false;
+			//buildingDef.AudioCategory = "Metal";
+			//buildingDef.AudioSize = "small";
+			//buildingDef.BaseTimeUntilRepair = -1f;
+			//buildingDef.DefaultAnimState = "mosaic_white";
+			//buildingDef.ObjectLayer = ObjectLayer.Backwall;
+			//buildingDef.SceneLayer = Grid.SceneLayer.Backwall;
+			var exteriorWall = new ExteriorWallConfig();
+
+			BuildingDef buildingDef = exteriorWall.CreateBuildingDef();
+			buildingDef.PrefabID = "LuxuryWall";
+			buildingDef.AnimFiles = new KAnimFile[1]
+			{
+				Assets.GetAnim("luxury_walls_kanim")
+			};
+
 			return buildingDef;
 		}
 

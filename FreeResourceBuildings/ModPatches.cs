@@ -113,6 +113,10 @@ namespace FreeResourceBuildingsPatches
 					AddStrings(MagicFeederConfig.ID, MagicFeederConfig.Name, MagicFeederConfig.Description, MagicFeederConfig.Effect);
 					ModUtil.AddBuildingToPlanScreen("Food", MagicFeederConfig.ID);
 					SetTechIfNeeded(MagicFeederConfig.ID, "Ranching", "FoodRepurposing", "FinerDining");
+					
+					AddStrings(MagicFishFeederConfig.ID, MagicFishFeederConfig.Name, MagicFishFeederConfig.Description, MagicFishFeederConfig.Effect);
+					ModUtil.AddBuildingToPlanScreen("Food", MagicFishFeederConfig.ID);
+					SetTechIfNeeded(MagicFishFeederConfig.ID, "Ranching", "FoodRepurposing", "FinerDining");
 
 				}
 

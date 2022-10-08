@@ -75,6 +75,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FirstAidBox\FirstAidBox.cs" />
+    <Compile Include="FreeLiquid\FreeSourceLiquid.cs" />
+    <Compile Include="MagicFishFeeder\MagicFishFeeder.cs" />
+    <Compile Include="MagicFishFeeder\MagicFishFeederConfig.cs" />
     <Compile Include="ModBuildingDefs.cs" />
     <Compile Include="ModConfig.cs" />
     <Compile Include="FreeRadbolt\RadBoltSilder.cs" />

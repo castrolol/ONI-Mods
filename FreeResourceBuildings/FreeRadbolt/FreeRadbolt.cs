@@ -4,6 +4,7 @@
 // MVID: 1C7E9CCB-4AA8-44E2-BE45-38990AABF98E
 // Assembly location: C:\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp.dll
 
+using FreeResourceBuildingsPatches;
 using KSerialization;
 using STRINGS;
 using System;
@@ -29,9 +30,9 @@ public class FreeRadbolt :
 	public float minLaunchInterval;
 	public float radiationSampleRate;
 	[Serialize]
-	public float particleThreshold = 50f;
+	public float particleThreshold = Mod.Options.defaultRadthreshold;
 	[Serialize]
-	public float amountPerCycle = 600;
+	public float amountPerCycle = Mod.Options.defaultRadGeneration;
 	private EightDirectionController directionController;
 	private float launcherTimer;
 	private float radiationSampleTimer;

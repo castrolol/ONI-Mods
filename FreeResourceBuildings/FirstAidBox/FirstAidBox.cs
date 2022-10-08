@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeResourceBuildingsPatches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,28 +14,29 @@ namespace FreeResourceBuildings
 		{
 			base.OnSpawn();
 
-
-
-			//BasicBooster
-			//IntermediateBooster
-			//BasicCure
-			//Antihistamine
-			//IntermediateCure
-			//AdvancedCure
-			//BasicRadPill
-			//IntermediateRadPill
-
-			foreach (var prefab in Assets.Prefabs)
+			if (Mod.Options.DiscoverAllUsableItems)
 			{
 
-				if (prefab.HasTag(GameTags.Medicine) || prefab.HasTag(GameTags.MedicalSupplies))
+				//BasicBooster
+				//IntermediateBooster
+				//BasicCure
+				//Antihistamine
+				//IntermediateCure
+				//AdvancedCure
+				//BasicRadPill
+				//IntermediateRadPill
+
+				foreach (var prefab in Assets.Prefabs)
 				{
-					var category = DiscoveredResources.GetCategoryForEntity(prefab);
-					DiscoveredResources.Instance.Discover(prefab.PrefabTag, category);
+
+					if (prefab.HasTag(GameTags.Medicine) || prefab.HasTag(GameTags.MedicalSupplies))
+					{
+						var category = DiscoveredResources.GetCategoryForEntity(prefab);
+						DiscoveredResources.Instance.Discover(prefab.PrefabTag, category);
+					}
 				}
+
 			}
-
-
 
 		}
 

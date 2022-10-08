@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeResourceBuildingsPatches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,9 @@ namespace FreeResourceBuildings
 		protected override void OnSpawn()
 		{
 			base.OnSpawn();
-
-			var tags = new[]
+			if (Mod.Options.DiscoverAllUsableItems)
+			{
+				var tags = new[]
 			{
 				GameTags.AtmoSuit,
 				GameTags.JetSuit,
@@ -27,20 +29,21 @@ namespace FreeResourceBuildings
 				"Funky_Vest".ToTag(),
 			};
 
-			foreach (var tag in tags)
-			{
-				try
+				foreach (var tag in tags)
 				{
-					var prefab = tag.Prefab();
-					if (prefab != null)
+					try
 					{
-						Tag categoryForEntity = DiscoveredResources.GetCategoryForEntity(prefab.GetComponent<KPrefabID>());
-						DiscoveredResources.Instance.Discover(tag, categoryForEntity);
+						var prefab = tag.Prefab();
+						if (prefab != null)
+						{
+							Tag categoryForEntity = DiscoveredResources.GetCategoryForEntity(prefab.GetComponent<KPrefabID>());
+							DiscoveredResources.Instance.Discover(tag, categoryForEntity);
+						}
 					}
-				}
-				catch (System.Exception e)
-				{
-					Debug.Log("Unpossible to load ");
+					catch (System.Exception e)
+					{
+						Debug.Log("Unpossible to load ");
+					}
 				}
 			}
 

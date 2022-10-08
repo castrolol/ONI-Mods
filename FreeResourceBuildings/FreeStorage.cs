@@ -14,7 +14,7 @@ namespace FreeResourceBuildings
 		private FilteredStorage filteredStorage;
 		private TreeFilterable filter;
 		[MyCmpReq]
-		private Storage storage;
+		public Storage storage;
 
 		public int singleItemCount = 10;
 		public int elementCount = 100000;
@@ -24,11 +24,17 @@ namespace FreeResourceBuildings
 
 			base.OnPrefabInit();
 
-			this.filteredStorage = new FilteredStorage((KMonoBehaviour)this, (Tag[])null, (Tag[])null, (IUserControlledCapacity)null, false, Db.Get().ChoreTypes.StorageFetch);
+			this.filteredStorage = new FilteredStorage(
+				(KMonoBehaviour)this, 
+				(Tag[])null, 
+				(IUserControlledCapacity)null, 
+				false, 
+				Db.Get().ChoreTypes.StorageFetch
+			);
 
 			filter = FindOrAdd<TreeFilterable>();
 
-			filter.OnFilterChanged = (System.Action<Tag[]>)System.Delegate.Combine(filter.OnFilterChanged, new System.Action<Tag[]>(OnFilterChanged));
+			filter.OnFilterChanged = (System.Action<HashSet<Tag>>)System.Delegate.Combine(filter.OnFilterChanged, new System.Action<HashSet<Tag>>(OnFilterChanged));
 
 			storage.allowClearable = true;
 
@@ -36,13 +42,13 @@ namespace FreeResourceBuildings
 
 		Tag[] selectedTags = new Tag[] { };
 
-		private void OnFilterChanged(Tag[] tags)
+		private void OnFilterChanged(HashSet<Tag> tags)
 		{
-			selectedTags = tags ?? new Tag[] { };
+			selectedTags = tags?.ToArray() ?? new Tag[] { };
 			var anim = this.GetComponent<KAnimControllerBase>();
 			if (anim)
 			{
-				if (tags == null || tags.Length == 0)
+				if (tags == null || selectedTags.Length == 0)
 				{
 					anim.Play((HashedString)"off");
 				}
@@ -157,7 +163,7 @@ namespace FreeResourceBuildings
 			List<Tag> alreadyAdded = new List<Tag>();
 
 			GameObject[] array = new GameObject[storage.items.Count];
-			var currentTags = storage.GetAllTagsInStorage();
+			var currentTags = storage.GetAllIDsInStorage();
 
 			storage.items.CopyTo(array);
 			var currentItems = array.ToList();

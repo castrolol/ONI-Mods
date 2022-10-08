@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace FreeResourceBuildings
 {
-	public class Trashcan : KMonoBehaviour, IUserControlledCapacity
+	public class Trashcan : KMonoBehaviour, ISim4000ms
 	{
 
 
@@ -31,40 +31,13 @@ namespace FreeResourceBuildings
 
 			storage.storageFilters = filters;
 			storage.capacityKg = 999999;
-			this.filteredStorage = new FilteredStorage((KMonoBehaviour)this, (Tag[])null, (Tag[])null, (IUserControlledCapacity)null, false, Db.Get().ChoreTypes.StorageFetch);
+			this.filteredStorage = new FilteredStorage((KMonoBehaviour)this, (Tag[])null, (IUserControlledCapacity)null, false, Db.Get().ChoreTypes.StorageFetch);
 
-			storage.OnStorageIncreased += Storage_OnStorageIncreased;
 
 		}
 
 
-		public float UserMaxCapacity
-		{
-			get => Mathf.Min(this.userMaxCapacity, this.storage.capacityKg);
-			set
-			{
-				this.userMaxCapacity = value;
-				this.filteredStorage.FilterChanged();
-			}
-		}
-
-		protected override void OnCleanUp()
-		{
-			var mass = storage.MassStored();
-
-			var itemsToRemove = new List<UnityEngine.GameObject>();
-			//removing
-			foreach (var item in storage.items)
-			{
-				itemsToRemove.Add(item);
-			}
-			foreach (var item in itemsToRemove)
-				storage.Remove(item, false);
-
-
-			storage.capacityKg -= mass;
-
-		}
+		  
 
 		public float AmountStored => storage.MassStored();
 
@@ -76,22 +49,12 @@ namespace FreeResourceBuildings
 
 		public LocString CapacityUnits => GameUtil.GetCurrentMassUnit();
 
-		private void Storage_OnStorageIncreased()
+		public void Sim4000ms(float dt)
 		{
-			var mass = storage.MassStored();
-
-			var itemsToRemove = new List<UnityEngine.GameObject>();
-			//removing
-			foreach (var item in storage.items)
+			foreach (GameObject current in storage.items)
 			{
-				itemsToRemove.Add(item);
+				current.DeleteObject();
 			}
-			foreach (var item in itemsToRemove)
-				storage.Remove(item, false);
-
-
-			storage.capacityKg -= mass;
-
 		}
 
 		protected override void OnSpawn()

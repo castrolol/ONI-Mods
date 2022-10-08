@@ -16,7 +16,7 @@ namespace FreeResourceBuildings
 		public const string Name = ModStrings.FreeLiquidSinkName;
 		public const string Description = ModStrings.FreeLiquidSinkDescription;
 		public const string Effect = ModStrings.FreeLiquidSinkEffect;
-
+		
 		public override BuildingDef CreateBuildingDef()
 		{
 			var options = ModBuildingDefs.Instance.GetDefaultOptions(

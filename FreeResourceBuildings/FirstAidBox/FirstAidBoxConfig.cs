@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeResourceBuildingsPatches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,9 +59,11 @@ namespace FreeResourceBuildings
 
 
 			var gen = go.AddOrGet<FirstAidBox>();
+
+			var modOptions = Mod.Options;
 			gen.elementCount = 100000;
-			gen.singleItemCount = 100;
-			gen.singleItemPerTick = 10;
+			gen.singleItemCount = modOptions.farmerFirstAidBoxItemsLimit;
+			gen.singleItemPerTick = Mathf.Min(modOptions.farmerFirstAidBoxItemsLimit, 10);
 		}
 
 		public override void DoPostConfigureUnderConstruction(GameObject go)

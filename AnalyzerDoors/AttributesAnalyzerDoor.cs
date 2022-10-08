@@ -589,15 +589,14 @@ namespace AnalyzerDoors
 
 				var minionObject = assignablesIdentity.GetTargetGameObject();
 
-
-				if (minionObject.GetMyWorldId() != ClusterManager.Instance.activeWorldId)
+				if (assignablesIdentity.GetComponent<KMonoBehaviour>().GetMyWorldId() != this.GetMyWorldId())
 					continue;
 
 				var resume = minionObject.GetComponent<MinionResume>();
 				var identity = minionObject.GetComponent<MinionIdentity>();
 				 
 				var attributes = resume.GetAttributes();
-
+ 
 				var conditions = config.GetAttributesList();
 				var permission = accessControl.DefaultPermission;
 
@@ -610,8 +609,10 @@ namespace AnalyzerDoors
 
 					if (condition.condition == AttributeConditionType.Ignore) continue;
 
-					var value = attributes.GetValue(condition.id);
-
+					var value = !config.isBaseValue ?
+						attributes.Get(condition.id).GetTotalValue() :
+						attributes.Get(condition.id).GetBaseValue();
+				 
 					if (!IsConditionReached(value, condition.condition, condition.amount))
 					{
 						orConditions.Add(false);
@@ -932,6 +933,9 @@ namespace AnalyzerDoors
 
 		[Serialize]
 		public bool needsAll;
+		
+		[Serialize]
+		public bool isBaseValue;
 
 		public List<AttributeCondition> GetAttributesList()
 		{
@@ -966,7 +970,7 @@ namespace AnalyzerDoors
 
 		[Serialize]
 		public string id;
-
+				
 		public AttributeCondition(string attributeId)
 		{
 			amount = 0;

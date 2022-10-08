@@ -67,7 +67,7 @@ namespace FreeResourceBuildings
 			go.AddOrGet<LogicOperationalController>();
 			go.GetComponent<KPrefabID>().AddTag(RoomConstraints.ConstraintTags.IndustrialMachinery, false);
 
-			var src = go.AddOrGet<FreeSource>();
+			var src = go.AddOrGet<FreeSourceLiquid>();
 			src.conduitType = ConduitType.Liquid;
 
 			go.AddOrGet<FlowSlider>();

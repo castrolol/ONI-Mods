@@ -1,4 +1,5 @@
-﻿using KSerialization;
+﻿using FreeResourceBuildingsPatches;
+using KSerialization;
 using STRINGS;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace FreeResourceBuildings
 
 		[SerializeField]
 		[Serialize]
-		public float Flow
-		{ get; set; } = 10000f;
+		public virtual float Flow
+		{ get; set; } = Mod.Options.defaultGasFlowRate;
 
 		[SerializeField]
 		[Serialize]
@@ -49,10 +50,25 @@ namespace FreeResourceBuildings
 		private float maxTemp;
 		private Operational.Flag filterFlag = new Operational.Flag("filter", Operational.Flag.Type.Requirement);
 
+		[MyCmpAdd]
+		private CopyBuildingSettings copyBuildingSettings;
+		private static readonly EventSystem.IntraObjectHandler<FreeSource> OnCopySettingsDelegate = new EventSystem.IntraObjectHandler<FreeSource>((System.Action<FreeSource, object>)((component, data) => component.OnCopySettings(data)));
+
+		private void OnCopySettings(object data)
+		{
+			FreeSource component = ((GameObject)data).GetComponent<FreeSource>();
+			if (!((UnityEngine.Object)component != (UnityEngine.Object)null))
+				return;
+			this.Flow = component.Flow;
+			this.Temp = component.Temp;
+		}
+
 		protected override void OnPrefabInit()
 		{
 			base.OnPrefabInit();
 			InitializeStatusItems();
+			this.Subscribe<FreeSource>(-905833192, FreeSource.OnCopySettingsDelegate);
+
 		}
 
 		private void InitializeStatusItems()
@@ -115,8 +131,13 @@ namespace FreeResourceBuildings
 
 				minTemp = element.lowTemp;
 				maxTemp = element.highTemp;
-
-				Temp = Mathf.Clamp(Temp, element.lowTemp, element.highTemp);
+				var newTemp = Mathf.Clamp(Temp, element.lowTemp, element.highTemp);
+				if (Temp != newTemp)
+				{
+					var cell = building.PlacementCells[0];
+					newTemp = Grid.Temperature[cell];
+					Temp = Mathf.Clamp(newTemp, element.lowTemp, element.highTemp);
+				}
 			}
 
 
@@ -167,7 +188,7 @@ namespace FreeResourceBuildings
 				}
 
 				anim.Play("on");
-				 
+
 				if (filteredElementItem != null)
 				{
 					anim.SetSymbolTint("place_color", filteredElementItem.substance.uiColour);

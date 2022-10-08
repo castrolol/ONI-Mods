@@ -43,7 +43,7 @@ namespace FreeResourceBuildings
 
 		public float GetSliderMax(int index)
 		{
-			return 6000f;
+			return 20000f;
 		}
 
 		public float GetSliderValue(int index)

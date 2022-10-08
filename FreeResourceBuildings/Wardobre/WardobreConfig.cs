@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeResourceBuildingsPatches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,8 +58,9 @@ namespace FreeResourceBuildings
 
 
 			var gen = go.AddOrGet<Wardobre>();
+			var modOptions = Mod.Options;
 			gen.elementCount = 100000;
-			gen.singleItemCount = 1;
+			gen.singleItemCount = modOptions.wardobreItemsLimit;
 			gen.singleItemPerTick = 1;
 		}
 

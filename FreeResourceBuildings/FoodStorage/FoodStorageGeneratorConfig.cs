@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeResourceBuildingsPatches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,9 @@ namespace FreeResourceBuildings
 	public class FoodStorageGeneratorConfig : IBuildingConfig
 	{
 		public static string ID = ModStrings.FoodStorageGeneratorID;
-		public static string Name = ModStrings.FreeEnergyGeneratorName;
-		public static string Description = ModStrings.FreeEnergyGeneratorDescription;
-		public static string Effect = ModStrings.FreeEnergyGeneratorEffect;
+		public static string Name = ModStrings.FoodStorageGeneratorName;
+		public static string Description = ModStrings.FoodStorageGeneratorDescription;
+		public static string Effect = ModStrings.FoodStorageGeneratorEffect;
 
 		public override BuildingDef CreateBuildingDef()
 		{
@@ -56,9 +57,10 @@ namespace FreeResourceBuildings
 
 
 			var gen = go.AddOrGet<FoodStorageGenerator>();
+			var modOptions = Mod.Options;
 			gen.elementCount = 100000;
-			gen.singleItemCount = 100;
-			gen.singleItemPerTick = 10;
+			gen.singleItemCount = modOptions.foodStorageItemsLimit;
+			gen.singleItemPerTick = Mathf.Min(modOptions.foodStorageItemsLimit, 10);
 		}
 
 		public override void DoPostConfigureUnderConstruction(GameObject go)

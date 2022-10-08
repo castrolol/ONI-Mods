@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeResourceBuildingsPatches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,10 +59,11 @@ namespace FreeResourceBuildings
 				
 			};
 
-		 
+
 			var gen = go.AddOrGet<FarmerStorage>();
-			gen.elementCount = 100000;
-			gen.singleItemCount = 10;
+			var modOptions = Mod.Options;
+			gen.elementCount = modOptions.farmerShelfElementsLimit;
+			gen.singleItemCount = modOptions.farmerShelfItemsLimit;
 			gen.singleItemPerTick = 1;
 		}
 
