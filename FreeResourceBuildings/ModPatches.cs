@@ -68,42 +68,42 @@ namespace FreeResourceBuildingsPatches
 				if (options.UseFreeEnergyGenerator)
 				{
 					AddStrings(FreeEnergyGenerator.ID, FreeEnergyGenerator.Name, FreeEnergyGenerator.Description, FreeEnergyGenerator.Effect);
-					ModUtil.AddBuildingToPlanScreen("Power", FreeEnergyGenerator.ID);
+					ModUtil.AddBuildingToPlanScreen("Power", FreeEnergyGenerator.ID, "generators");
 					SetTechIfNeeded(FreeEnergyGenerator.ID, "PowerRegulation", "AdvancedPowerRegulation", "ImprovedCombustion");
 
 				}
 				if (options.UseFreeStorage)
 				{
 					AddStrings(StorageGeneratorConfig.ID, StorageGeneratorConfig.Name, StorageGeneratorConfig.Description, StorageGeneratorConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("Base", StorageGeneratorConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("Base", StorageGeneratorConfig.ID, "storage");
 					SetTechIfNeeded(StorageGeneratorConfig.ID, "Jobs", "SolidTransport", "SolidManagement");
 
 				}
 				if (options.UseMagicRefrigerator)
 				{
 					AddStrings(FoodStorageGeneratorConfig.ID, FoodStorageGeneratorConfig.Name, FoodStorageGeneratorConfig.Description, FoodStorageGeneratorConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("Food", FoodStorageGeneratorConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("Food", FoodStorageGeneratorConfig.ID, "storage");
 					SetTechIfNeeded(FoodStorageGeneratorConfig.ID, "FarmingTech", "Agriculture", "FinerDining");
 
 				}
 				if (options.UseFreeGasSource)
 				{
 					AddStrings(FreeGasSourceConfig.ID, FreeGasSourceConfig.Name, FreeGasSourceConfig.Description, FreeGasSourceConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("HVAC", FreeGasSourceConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("HVAC", FreeGasSourceConfig.ID, "pumps");
 					SetTechIfNeeded(FreeGasSourceConfig.ID, "GasPiping", "DirectedAirStreams", "Catalytics");
 				 
 					AddStrings(FreeGasSinkConfig.ID, FreeGasSinkConfig.Name, FreeGasSinkConfig.Description, FreeGasSinkConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("HVAC", FreeGasSinkConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("HVAC", FreeGasSinkConfig.ID, "valves");
 					SetTechIfNeeded(FreeGasSinkConfig.ID, "GasPiping", "DirectedAirStreams", "Catalytics");
 				}
 				if (options.UseFreeLiquidSource)
 				{
 					AddStrings(FreeLiquidSinkConfig.ID, FreeLiquidSinkConfig.Name, FreeLiquidSinkConfig.Description, FreeLiquidSinkConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("Plumbing", FreeLiquidSinkConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("Plumbing", FreeLiquidSinkConfig.ID, "valves");
 					SetTechIfNeeded(FreeLiquidSinkConfig.ID, "LiquidPiping", "LiquidDistribution", "AdvancedSanitation");
 				 
 					AddStrings(FreeLiquidSourceConfig.ID, FreeLiquidSourceConfig.Name, FreeLiquidSourceConfig.Description, FreeLiquidSourceConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("Plumbing", FreeLiquidSourceConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("Plumbing", FreeLiquidSourceConfig.ID, "pumps");
 					SetTechIfNeeded(FreeLiquidSourceConfig.ID, "LiquidPiping", "LiquidDistribution", "AdvancedSanitation");
 
 				}
@@ -111,11 +111,11 @@ namespace FreeResourceBuildingsPatches
 				if (options.UseMagicFeeder)
 				{
 					AddStrings(MagicFeederConfig.ID, MagicFeederConfig.Name, MagicFeederConfig.Description, MagicFeederConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("Food", MagicFeederConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("Food", MagicFeederConfig.ID, "ranching");
 					SetTechIfNeeded(MagicFeederConfig.ID, "Ranching", "FoodRepurposing", "FinerDining");
 					
 					AddStrings(MagicFishFeederConfig.ID, MagicFishFeederConfig.Name, MagicFishFeederConfig.Description, MagicFishFeederConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("Food", MagicFishFeederConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("Food", MagicFishFeederConfig.ID, "ranching");
 					SetTechIfNeeded(MagicFishFeederConfig.ID, "Ranching", "FoodRepurposing", "FinerDining");
 
 				}
@@ -123,35 +123,35 @@ namespace FreeResourceBuildingsPatches
 				if (options.UseMagicWardobre)
 				{
 					AddStrings(WardobreConfig.ID, WardobreConfig.Name, WardobreConfig.Description, WardobreConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("Furniture", WardobreConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("Furniture", WardobreConfig.ID, "decor");
 					SetTechIfNeeded(WardobreConfig.ID, "InteriorDecor", "Luxury", "GlassFurnishings");
 
 				}
 				if (options.UseTrashcan)
 				{
 					AddStrings(TrashcanConfig.ID, TrashcanConfig.Name, TrashcanConfig.Description, TrashcanConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("Base", TrashcanConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("Base", TrashcanConfig.ID, "storage");
 					SetTechIfNeeded(TrashcanConfig.ID, "Jobs", "SolidTransport", "SolidManagement");
 
 				}
 				if (options.UseFirstAidBox)
 				{
 					AddStrings(FirstAidBoxConfig.ID, FirstAidBoxConfig.Name, FirstAidBoxConfig.Description, FirstAidBoxConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("Medical", FirstAidBoxConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("Medical", FirstAidBoxConfig.ID, "medical");
 					SetTechIfNeeded(FirstAidBoxConfig.ID, "MedicineI", "MedicineIII", "MedicineIV");
 
 				}
 				if (DlcManager.IsExpansion1Active() && options.UseFreeRadboltSource)
 				{
 					AddStrings(FreeRadboltConfig.ID, FreeRadboltConfig.Name, FreeRadboltConfig.Description, FreeRadboltConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("HEP", FreeRadboltConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("HEP", FreeRadboltConfig.ID, "producers");
 					SetTechIfNeeded(FreeRadboltConfig.ID, "NuclearResearch", "AdvancedNuclearResearch", "NuclearPropulsion");
 
 				}
 				if (options.UseFarmerShelf)
 				{
 					AddStrings(FarmerStorageConfig.ID, FarmerStorageConfig.Name, FarmerStorageConfig.Description, FarmerStorageConfig.Effect);
-					ModUtil.AddBuildingToPlanScreen("Food", FarmerStorageConfig.ID);
+					ModUtil.AddBuildingToPlanScreen("Food", FarmerStorageConfig.ID, "storage");
 					SetTechIfNeeded(FarmerStorageConfig.ID, "FarmingTech", "Ranching", "AnimalControl");
 				} 
 
