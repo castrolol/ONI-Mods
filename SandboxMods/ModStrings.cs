@@ -105,10 +105,6 @@ namespace FreeResourceBuildings
         public const string FreeConveyourEffect =  "Keep generating a generous amount of selected items";
         public const string FreeConveyourDescription = "It provides you a free source of items, mark collect only to avoid of loose your other items";
 
-        public const string FreeWoodID = "FreeWood";
-        public const string FreeWoodName = "Conveyor Generator";
-        public const string FreeWoodEffect = "Keep generating a generous amount of selected items";
-        public const string FreeWoodDescription = "It provides you a free source of items, mark collect only to avoid of loose your other items";
 
     }
 }

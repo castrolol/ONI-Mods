@@ -183,13 +183,13 @@ namespace FreeResourceBuildings
 		public void SetSliderValue(float value, int index)
 		{
 			currentCapacity = value;
-			building.Def.GeneratorWattageRating = value;
+			// building.Def.GeneratorWattageRating = value;
 		}
 
 
 		public string GetSliderTooltipKey(int index) => "STRINGS.UI.UISIDESCREENS.MANUALDELIVERYGENERATORSIDESCREEN.TOOLTIP";
 
-		public string GetSliderTooltip()
+		public string GetSliderTooltip(int index)
 		{
 			return "Tooltip";
 		}

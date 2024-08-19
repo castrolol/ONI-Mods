@@ -195,7 +195,7 @@ public class FreeRadbolt :
 
 	public string GetSliderTooltipKey(int index) => "STRINGS.UI.UISIDESCREENS.RADBOLTTHRESHOLDSIDESCREEN.TOOLTIP";
 
-	string ISliderControl.GetSliderTooltip() => string.Format((string)Strings.Get("STRINGS.UI.UISIDESCREENS.RADBOLTTHRESHOLDSIDESCREEN.TOOLTIP"), (object)this.particleThreshold);
+	string ISliderControl.GetSliderTooltip(int index) => string.Format((string)Strings.Get("STRINGS.UI.UISIDESCREENS.RADBOLTTHRESHOLDSIDESCREEN.TOOLTIP"), (object)this.particleThreshold);
 
 	public class StatesInstance :
 	  GameStateMachine<FreeRadbolt.States, FreeRadbolt.StatesInstance, FreeRadbolt, object>.GameInstance

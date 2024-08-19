@@ -25,7 +25,7 @@ namespace FreeResourceBuildings
 		[MyCmpGet]
 		public Filterable filterable;
 
-		public string GetSliderTooltip() => Title;
+		public string GetSliderTooltip(int index) => Title;
 
 		public string GetSliderTooltipKey(int index)
 		{

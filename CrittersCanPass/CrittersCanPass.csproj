@@ -11,7 +11,8 @@
     <RootNamespace>CrittersCanPass</RootNamespace>
     <AssemblyName>CrittersCanPass</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+	  <LangVersion>11.0</LangVersion>
+	  <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>

@@ -36,20 +36,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\ONI-Mods-master\ONI-Mods-master\libs\0Harmony.dll</HintPath>
+      <HintPath>..\..\libs\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\ONI-Mods-master\ONI-Mods-master\libs\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\libs\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\..\ONI-Mods-masterx\ONI-Mods-master\libs\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>..\..\libs\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\ONI-Mods-masterx\ONI-Mods-master\libs\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PLib, Version=4.8.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\PLib.4.8.1\lib\net471\PLib.dll</HintPath>
+    <Reference Include="PLib, Version=4.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PLib.4.16.0\lib\net471\PLib.dll</HintPath>
     </Reference>
     <Reference Include="System">
     </Reference>
@@ -63,16 +63,20 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\libs\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\ONI-Mods-master\ONI-Mods-master\libs\UnityEngine.dll</HintPath>
+      <HintPath>..\..\libs\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\ONI-Mods-master\ONI-Mods-master\libs\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\libs\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\libs\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\ONI-Mods-master\ONI-Mods-master\libs\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\..\libs\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +93,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -96,7 +101,7 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\ILRepack.2.0.18\build\ILRepack.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ILRepack.2.0.18\build\ILRepack.props'))" />
+    <Error Condition="!Exists('..\packages\ILRepack.2.0.18\build\ILRepack.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ILRepack.2.0.18\build\ILRepack.props'))" />
   </Target>
   <Target Name="AfterBuild">
     <PropertyGroup>
@@ -105,13 +110,13 @@
       <!-- Our main assembly -->
     </PropertyGroup>
     <ItemGroup>
-      <ILRepackPackage Include="$(ProjectDir)packages\ILRepack*\tools\ilrepack.exe" />
+      <ILRepackPackage Include="$(SolutionDir)packages\ILRepack*\tools\ilrepack.exe" />
       <OtherAssemblies Include="$(OutputPath)PLib.dll" Exclude="$(BuildedAssembly)" />
       <!-- All other assemblies in output directory (- referenced projects) -->
     </ItemGroup>
     <Message Text="$(ModPath)" />
     <Error Condition="!Exists(@(ILRepackPackage->'%(FullPath)'))" Text="You are trying to use the ILRepack package, but it is not installed or at the correct location " />
-    <Exec WorkingDirectory="$(ProjectDir)" Command=".\packages\ILRepack.2.0.18\tools\ilrepack.exe /lib:$(OutputPath) /out:.\$(BuildedAssembly) .\$(BuildedAssembly) @(OtherAssemblies,' ')" />
-    <Exec WorkingDirectory="$(ProjectDir)" Command="cp $(BuildedAssembly) $(ModPath) " />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="..\packages\ILRepack.2.0.18\tools\ilrepack.exe /lib:$(OutputPath) /out:.\$(BuildedAssembly) .\$(BuildedAssembly) @(OtherAssemblies,' ')" />
+    <Exec WorkingDirectory="$(ProjectDir)" Command="copy $(BuildedAssembly) $(ModPath) " />
   </Target>
 </Project>

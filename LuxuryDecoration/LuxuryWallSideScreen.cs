@@ -234,6 +234,20 @@ namespace LuxuryDecoration
 				{
 					case "chess":
 						return "Chess";
+					case "stars":
+						return "Stars";
+					case "clouds":
+						return "Clouds";
+					case "animal":
+						return "Animals";
+					case "web":
+						return "Web";
+					case "flowers":
+						return "Flowers";
+					case "cute":
+						return "Daisies";
+					case "doodle":
+						return "Doodles";
 					case "bighex":
 						return "Big Hexes";
 					case "bricks":

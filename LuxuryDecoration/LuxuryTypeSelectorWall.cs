@@ -1,4 +1,4 @@
-﻿using KSerialization;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +15,10 @@ namespace LuxuryDecoration
 
 
 		[SerializeField]
-		[Serialize]
+		[KSerialization.Serialize]
 		private string selectedType;
 		[SerializeField]
-		[Serialize]
+		[KSerialization.Serialize]
 		private string selectedColor;
 
 		string Type => selectedType ?? lastSelectedType ?? "chess";
@@ -30,7 +30,7 @@ namespace LuxuryDecoration
 		[MyCmpAdd]
 		private CopyBuildingSettings copyBuildingSettings;
 
-		List<String> types = new List<string> { "chess", "bighex", "bricks", "cubes", "diamond", "hex", "mosaic", "liquid", "leather", "fabric", "stones", "old", "braids" };
+		List<String> types = new List<string> { "chess", "stars", "clouds", "animal", "web", "doodle", "flowers", "cute", "bighex", "bricks", "cubes", "diamond", "hex", "mosaic", "liquid", "leather", "fabric", "stones", "old", "braids" };
 		List<String> colors = new List<string> { "white", "black", "red", "green", "blue", "purple", "yellow" };
 
 		private static readonly EventSystem.IntraObjectHandler<LuxuryTypeSelectorWall> OnCopySettingsDelegate = new EventSystem.IntraObjectHandler<LuxuryTypeSelectorWall>((System.Action<LuxuryTypeSelectorWall, object>)((component, data) => component.OnCopySettings(data)));

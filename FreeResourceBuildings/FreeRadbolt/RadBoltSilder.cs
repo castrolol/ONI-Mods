@@ -24,7 +24,7 @@ namespace FreeResourceBuildings
 		[MyCmpGet]
 		public FreeRadbolt radbolt;
 
-		public string GetSliderTooltip() => Title;
+		public string GetSliderTooltip(int index) => Title;
 
 		public string GetSliderTooltipKey(int index)
 		{

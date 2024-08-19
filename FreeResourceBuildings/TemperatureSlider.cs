@@ -43,7 +43,7 @@ namespace FreeResourceBuildings
 		[MyCmpGet]
 		public Filterable filterable;
 
-		public string GetSliderTooltip() => Tooltip;
+		public string GetSliderTooltip(int index) => Tooltip;
 
 		public string GetSliderTooltipKey(int index) => "STRINGS.UI.UISIDESCREENS.INFINITESOURCE.TEMP.TOOLTIP";
 
@@ -60,7 +60,7 @@ namespace FreeResourceBuildings
 		public float GetSliderMax(int index)
 		{
 			Element element = ElementLoader.GetElement(filterable.SelectedTag);
-			return GameUtil.GetConvertedTemperature(Math.Min(element?.highTemp ?? 300f, 2700f));
+			return GameUtil.GetConvertedTemperature(element?.highTemp ?? 2700f);
 		}
 
 		public float GetSliderValue(int index)

@@ -648,19 +648,15 @@ namespace AnalyzerDoors
 
 			}
 
-			if (forceUpdate)
-			{
-				var detail = Traverse.Create(DetailsScreen.Instance);
-				var tabs = detail.Field("tabs").GetValue<List<KScreen>>();
-				foreach (var tab in tabs)
-				{
-					if (tab is SimpleInfoScreen)
-					{
-						((SimpleInfoScreen)tab).Refresh(true);
-					}
-				}
+			//if (forceUpdate)
+			//{
+			//	var detail = Traverse.Create(DetailsScreen.Instance);
+			//	var tabHeader = detail.Field("tabHeader");//.GetValue<DetailTabHeader>();
+			//	var tabGo = tabHeader.Field("simpleInfoScreen").GetValue<GameObject>();
+			//	var tab = tabGo.GetComponent<SimpleInfoScreen>();
 
-			}
+			//	Traverse.Create(tab).Method("RefreshWorldPanel").GetValue();
+			//}
 
 		}
 
