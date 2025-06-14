@@ -58,19 +58,25 @@ namespace FreeResourceBuildings
             storage1.allowSettingOnlyFetchMarkedItems = false;
             storage1.showCapacityStatusItem = true;
             storage1.showCapacityAsMainStatus = true;
+            storage1.dropOffset = Vector2.up * 1f;
+            storage1.storageID = new Tag("FishFeederTop");
             Storage storage2 = go.AddComponent<Storage>();
             storage2.capacityKg = 200f;
             storage2.showInUI = true;
             storage2.showDescriptor = true;
             storage2.allowItemRemoval = false;
+            storage2.dropOffset = Vector2.up * 3.5f;
+            storage2.storageID = new Tag("FishFeederBot");
             go.AddOrGet<StorageLocker>().choreTypeID = Db.Get().ChoreTypes.RanchingFetch.Id;
             go.AddOrGet<UserNameable>();
             Effect resource = new Effect("AteFromFeeder", (string)STRINGS.CREATURES.MODIFIERS.ATE_FROM_FEEDER.NAME, (string)STRINGS.CREATURES.MODIFIERS.ATE_FROM_FEEDER.TOOLTIP, 600f, true, false, false);
             resource.Add(new AttributeModifier(Db.Get().Amounts.Wildness.deltaAttribute.Id, -0.03333334f, (string)STRINGS.CREATURES.MODIFIERS.ATE_FROM_FEEDER.NAME));
             resource.Add(new AttributeModifier(Db.Get().CritterAttributes.Happiness.Id, 2f, (string)STRINGS.CREATURES.MODIFIERS.ATE_FROM_FEEDER.NAME));
             Db.Get().effects.Add(resource);
-            go.AddOrGet<TreeFilterable>();
-            go.AddOrGet<CreatureFeeder>().effectId = resource.Id;
+            go.AddOrGet<TreeFilterable>().filterAllStoragesOnBuilding = true;
+            CreatureFeeder creatureFeeder = go.AddOrGet<CreatureFeeder>();
+            creatureFeeder.effectId = resource.Id;
+            creatureFeeder.feederOffset = new CellOffset(0, -2);
             var gen = go.AddOrGet<MagicFishFeeder>();
 
             //gen.storage = storage2;
@@ -80,7 +86,7 @@ namespace FreeResourceBuildings
             gen.singleItemCount = modOptions.magicFeederItemsLimit;
             gen.singleItemPerTick = 1;
         }
-         
+
 
         public override void DoPostConfigureComplete(GameObject go)
         {
@@ -88,7 +94,7 @@ namespace FreeResourceBuildings
             go.AddOrGetDef<FishFeeder.Def>();
             go.AddOrGetDef<MakeBaseSolid.Def>().solidOffsets = new CellOffset[1]
             {
-      new CellOffset(0, 0)
+              new CellOffset(0, 0)
             };
             SymbolOverrideControllerUtil.AddToPrefab(go);
 
@@ -99,9 +105,10 @@ namespace FreeResourceBuildings
         public override void ConfigurePost(BuildingDef def)
         {
             List<Tag> tagList = new List<Tag>();
-            Tag[] target_species = new Tag[1]
+            Tag[] target_species = new[]
             {
-      GameTags.Creatures.Species.PacuSpecies
+              GameTags.Creatures.Species.PacuSpecies,
+              GameTags.Creatures.Species.PrehistoricPacuSpecies,
             };
             foreach (KeyValuePair<Tag, Diet> collectDiet in DietManager.CollectDiets(target_species))
                 tagList.Add(collectDiet.Key);
