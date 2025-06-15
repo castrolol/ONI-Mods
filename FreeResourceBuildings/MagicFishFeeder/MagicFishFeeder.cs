@@ -17,10 +17,11 @@ namespace FreeResourceBuildings
 			if (Mod.Options.DiscoverAllUsableItems)
 			{
 				List<Tag> tagList = new List<Tag>();
-				Tag[] target_species = new Tag[1]
+				Tag[] target_species = new []
 				   {
-					  GameTags.Creatures.Species.PacuSpecies
-				   };
+					  GameTags.Creatures.Species.PacuSpecies,
+                      GameTags.Creatures.Species.PrehistoricPacuSpecies
+                   };
 
 				foreach (KeyValuePair<Tag, Diet> collectDiet in DietManager.CollectDiets(target_species))
 					tagList.Add(collectDiet.Key);

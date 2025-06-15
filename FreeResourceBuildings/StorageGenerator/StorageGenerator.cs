@@ -25,8 +25,6 @@ namespace FreeResourceBuildings
 				 
 				GeneShufflerRechargeConfig.ID,
 				HeatCubeConfig.ID,
-				BabyCrabShellConfig.ID,
-				BabyCrabWoodShellConfig.ID,
 				OrbitalResearchDatabankConfig.ID,
 				GasGrassHarvestedConfig.ID,
 				TableSaltConfig.ID,
