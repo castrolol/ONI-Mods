@@ -397,9 +397,14 @@ namespace AnalyzerDoors
 			StructureTemperatureComponents structureTemperatures = GameComps.StructureTemperatures;
 			structureTemperatures.Bypass(structureTemperatures.GetHandle(this.gameObject));
 			this.do_melt_check = true;
+
+
+			
 		}
 
-		protected override void OnCompleteWork(Worker worker)
+
+
+		protected override void OnCompleteWork(WorkerBase worker)
 		{
 			base.OnCompleteWork(worker);
 			this.changeStateChore = (Chore)null;

@@ -402,7 +402,7 @@ namespace AnalyzerDoors
 			this.do_melt_check = true;
 		}
 
-		protected override void OnCompleteWork(Worker worker)
+		protected override void OnCompleteWork(WorkerBase worker)
 		{
 			base.OnCompleteWork(worker);
 			this.changeStateChore = (Chore)null;
