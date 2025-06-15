@@ -5,3 +5,4 @@ packages/
 **/bin
 **/obj
 Version.txt
+Environment.props

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- 
+      INSTRUCTIONS: 
+        1. Rename or copy this file to 'Environment.props'. 
+        2. The 'Environment.props' file is ignored by Git to avoid conflicts. 
+        3. Change the path below to the Oxygen Not Included installation directory on your machine, where the game's DLLs (Assembly-CSharp.dll, etc.) are located. 
+        
+        Example for Windows: C:\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed
+    -->
+    <GameLibsPath>C:\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed</GameLibsPath>
+
+    <!-- 
+      Set this to your development mods folder for Oxygen Not Included. 
+      The project name will be appended automatically to create the final mod path.
+      Example (Windows): C:\Users\YourUser\Documents\Klei\OxygenNotIncluded\mods\Dev
+    -->
+    <ModsDevPath>C:\Users\YourUser\Documents\Klei\OxygenNotIncluded\mods\dev</ModsDevPath>
+
+  </PropertyGroup>
+</Project>

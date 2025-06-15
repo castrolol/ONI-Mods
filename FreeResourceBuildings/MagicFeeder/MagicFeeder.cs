@@ -17,7 +17,7 @@ namespace FreeResourceBuildings
 			if (Mod.Options.DiscoverAllUsableItems)
 			{
 				List<Tag> tagList = new List<Tag>();
-				Tag[] target_species = new Tag[6]
+				List<Tag> targetSpecies = new List<Tag>
 				{
 				  GameTags.Creatures.Species.LightBugSpecies,
 				  GameTags.Creatures.Species.HatchSpecies,
@@ -27,7 +27,17 @@ namespace FreeResourceBuildings
 				  GameTags.Creatures.Species.DivergentSpecies
 				};
 
-				foreach (KeyValuePair<Tag, Diet> collectDiet in DietManager.CollectDiets(target_species))
+
+				if (DlcManager.IsContentSubscribed(DlcManager.DLC4_ID))
+				{
+					targetSpecies.Add(GameTags.Creatures.Species.StegoSpecies);
+					targetSpecies.Add(GameTags.Creatures.Species.RaptorSpecies);
+					targetSpecies.Add(GameTags.Creatures.Species.ChameleonSpecies);
+				}
+
+				var collectDiets = DietManager.CollectDiets(targetSpecies.ToArray());
+
+				foreach (KeyValuePair<Tag, Diet> collectDiet in collectDiets)
 					tagList.Add(collectDiet.Key);
 
 

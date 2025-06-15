@@ -17,13 +17,20 @@ namespace FreeResourceBuildings
 			if (Mod.Options.DiscoverAllUsableItems)
 			{
 				List<Tag> tagList = new List<Tag>();
-				Tag[] target_species = new []
-				   {
+				List<Tag> targetSpecies = new List<Tag>
+				{
 					  GameTags.Creatures.Species.PacuSpecies,
-                      GameTags.Creatures.Species.PrehistoricPacuSpecies
-                   };
+				};
 
-				foreach (KeyValuePair<Tag, Diet> collectDiet in DietManager.CollectDiets(target_species))
+				if (DlcManager.IsContentSubscribed(DlcManager.DLC4_ID))
+				{
+					targetSpecies.Add(GameTags.Creatures.Species.PrehistoricPacuSpecies);
+				}
+
+
+				var collectDiets = DietManager.CollectDiets(targetSpecies.ToArray());
+
+				foreach (KeyValuePair<Tag, Diet> collectDiet in collectDiets)
 					tagList.Add(collectDiet.Key);
 
 
