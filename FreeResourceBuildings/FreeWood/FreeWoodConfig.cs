@@ -18,7 +18,7 @@ public class FreeWoodConfig : IBuildingConfig
     public static string Description = ModStrings.FreeWoodDescription;
     public static string Effect = ModStrings.FreeWoodEffect;
 
-    public override string[] GetDlcIds() => DlcManager.AVAILABLE_DLC_2;
+    public override string[] GetRequiredDlcIds() => DlcManager.DLC2;
 
     public override BuildingDef CreateBuildingDef()
     {

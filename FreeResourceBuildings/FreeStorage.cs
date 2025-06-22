@@ -44,6 +44,8 @@ namespace FreeResourceBuildings
 
 		private void OnFilterChanged(HashSet<Tag> tags)
 		{
+			if (!storage) return;
+
 			selectedTags = tags?.ToArray() ?? new Tag[] { };
 			var anim = this.GetComponent<KAnimControllerBase>();
 			if (anim)

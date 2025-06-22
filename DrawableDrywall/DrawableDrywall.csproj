@@ -1,139 +1,131 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
   <!-- 
     CHANGE: Imports local environment properties from the solution root ('..\').
     This allows a single Environment.props file to serve multiple projects in the same solution.
   -->
   <Import Project="..\Environment.props" Condition="Exists('..\Environment.props')" />
-
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-
   <!-- Path Validations -->
   <Target Name="ValidateEnvironmentPaths" BeforeTargets="PrepareForBuild">
-	<Error Condition="!Exists('$(GameLibsPath)')"
-           Text="Game libraries path not found at '$(GameLibsPath)'. Please copy 'Environment.props.template' to 'Environment.props' in the solution root and configure the correct path." />
-	<Error Condition="'$(ModsDevPath)' == '' Or !Exists('$(ModsDevPath)')"
-           Text="Mods development path not found at '$(ModsDevPath)'. Please set the 'ModsDevPath' property in your 'Environment.props' file."/>
+    <Error Condition="!Exists('$(GameLibsPath)')" Text="Game libraries path not found at '$(GameLibsPath)'. Please copy 'Environment.props.template' to 'Environment.props' in the solution root and configure the correct path." />
+    <Error Condition="'$(ModsDevPath)' == '' Or !Exists('$(ModsDevPath)')" Text="Mods development path not found at '$(ModsDevPath)'. Please set the 'ModsDevPath' property in your 'Environment.props' file." />
   </Target>
-
   <PropertyGroup>
-	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-	<ProjectGuid>{B056382F-B0DC-4F1E-B097-C59A7B2460FD}</ProjectGuid>
-	<OutputType>Library</OutputType>
-	<AppDesignerFolder>Properties</AppDesignerFolder>
-	<RootNamespace>DrawableDecoration</RootNamespace>
-	<AssemblyName>DrawableDecoration</AssemblyName>
-	<TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-	<FileAlignment>512</FileAlignment>
-	<Deterministic>true</Deterministic>
-	<TargetFrameworkProfile />
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B056382F-B0DC-4F1E-B097-C59A7B2460FD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DrawableDecoration</RootNamespace>
+    <AssemblyName>DrawableDecoration</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	<DebugSymbols>true</DebugSymbols>
-	<DebugType>full</DebugType>
-	<Optimize>false</Optimize>
-	<OutputPath>bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE</DefineConstants>
-	<ErrorReport>prompt</ErrorReport>
-	<WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	<DebugType>pdbonly</DebugType>
-	<Optimize>true</Optimize>
-	<OutputPath>bin\Release\</OutputPath>
-	<DefineConstants>TRACE</DefineConstants>
-	<ErrorReport>prompt</ErrorReport>
-	<WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-	<!-- References now use the $(GameLibsPath) variable -->
-	<Reference Include="0Harmony">
-	  <HintPath>$(GameLibsPath)\0Harmony.dll</HintPath>
-	  <Private>False</Private>
-	</Reference>
-	<Reference Include="Assembly-CSharp">
-	  <HintPath>$(GameLibsPath)\Assembly-CSharp.dll</HintPath>
-	  <Private>False</Private>
-	</Reference>
-	<Reference Include="Assembly-CSharp-firstpass">
-	  <HintPath>$(GameLibsPath)\Assembly-CSharp-firstpass.dll</HintPath>
-	  <Private>False</Private>
-	</Reference>
-	<Reference Include="Newtonsoft.Json">
-	  <HintPath>$(GameLibsPath)\Newtonsoft.Json.dll</HintPath>
-	  <Private>False</Private>
-	</Reference>
-	<Reference Include="System" />
-	<Reference Include="System.Core" />
-	<Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
-	<Reference Include="System.Xml.Linq" />
-	<Reference Include="Microsoft.CSharp" />
-	<Reference Include="System.Data" />
-	<Reference Include="System.Xml" />
-	<Reference Include="UnityEngine">
-	  <HintPath>$(GameLibsPath)\UnityEngine.dll</HintPath>
-	  <Private>False</Private>
-	</Reference>
-	<Reference Include="UnityEngine.CoreModule">
-	  <HintPath>$(GameLibsPath)\UnityEngine.CoreModule.dll</HintPath>
-	  <Private>False</Private>
-	</Reference>
-	<Reference Include="UnityEngine.TextRenderingModule">
-	  <HintPath>$(GameLibsPath)\UnityEngine.TextRenderingModule.dll</HintPath>
-	  <Private>False</Private>
-	</Reference>
-	<Reference Include="UnityEngine.UI">
-	  <HintPath>$(GameLibsPath)\UnityEngine.UI.dll</HintPath>
-	  <Private>False</Private>
-	</Reference>
+    <!-- References now use the $(GameLibsPath) variable -->
+    <Reference Include="0Harmony">
+      <HintPath>$(GameLibsPath)\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(GameLibsPath)\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>$(GameLibsPath)\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(GameLibsPath)\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>$(GameLibsPath)\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(GameLibsPath)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>$(GameLibsPath)\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(GameLibsPath)\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-	<Compile Include="DrawableWall.cs" />
-	<Compile Include="DrawableWallSideScreen.cs" />
-	<Compile Include="IDrawableColorSelectable.cs" />
-	<Compile Include="ModPatches.cs" />
-	<Compile Include="DrawableWallConfig.cs" />
-	<Compile Include="PGrid3x3Panel.cs" />
-	<Compile Include="UI\Grid3x3Component.cs" />
-	<Compile Include="UI\PDetourClone.cs" />
-	<Compile Include="UI\PGrid3x3.cs" />
-	<Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DrawableWall.cs" />
+    <Compile Include="DrawableWallSideScreen.cs" />
+    <Compile Include="IDrawableColorSelectable.cs" />
+    <Compile Include="ModPatches.cs" />
+    <Compile Include="DrawableWallConfig.cs" />
+    <Compile Include="PGrid3x3Panel.cs" />
+    <Compile Include="UI\Grid3x3Component.cs" />
+    <Compile Include="UI\PDetourClone.cs" />
+    <Compile Include="UI\PGrid3x3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-	<PackageReference Include="PLib">
-	  <Version>4.8.1</Version>
-	</PackageReference>
+    <PackageReference Include="PLib">
+      <Version>4.17.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-
   <Target Name="CheckForILRepackTool" BeforeTargets="PrepareForBuild">
-	<Message Text="Checking for ILRepack tool..." Importance="high" />
-	<Exec Command="where.exe ilrepack" Condition=" '$(OS)' == 'Windows_NT' " ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low">
-	  <Output TaskParameter="ExitCode" PropertyName="ExitCode_ILRepackCheck" />
-	</Exec>
-	<Exec Command="which ilrepack" Condition=" '$(OS)' != 'Windows_NT' " ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low">
-	  <Output TaskParameter="ExitCode" PropertyName="ExitCode_ILRepackCheck" />
-	</Exec>
-	<Error Condition=" '$(ExitCode_ILRepackCheck)' != '0' " Text="ILRepack command-line tool not found. Please install it as a dotnet global tool ('dotnet tool install -g ILRepack.MSBuild.Task') or ensure it is in your system's PATH." />
+    <Message Text="Checking for ILRepack tool..." Importance="high" />
+    <Exec Command="where.exe ilrepack" Condition=" '$(OS)' == 'Windows_NT' " ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low">
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode_ILRepackCheck" />
+    </Exec>
+    <Exec Command="which ilrepack" Condition=" '$(OS)' != 'Windows_NT' " ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low">
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode_ILRepackCheck" />
+    </Exec>
+    <Error Condition=" '$(ExitCode_ILRepackCheck)' != '0' " Text="ILRepack command-line tool not found. Please install it as a dotnet global tool ('dotnet tool install -g ILRepack.MSBuild.Task') or ensure it is in your system's PATH." />
   </Target>
-
   <Target Name="AfterBuild">
-	<PropertyGroup>
-	  <BuildedAssembly>$(OutputPath)$(AssemblyName).dll</BuildedAssembly>
-	  <!-- CHANGE: ModPath is now built dynamically from a global path and the project name -->
-	  <ModPath>$(ModsDevPath)\$(AssemblyName)</ModPath>
-	</PropertyGroup>
-	<ItemGroup>
-	  <AssembliesToMerge Include="$(OutputPath)PLib.dll">
-		<InProject>false</InProject>
-		<Visible>false</Visible>
-	  </AssembliesToMerge>
-	</ItemGroup>
-	<Message Text="Merging assemblies with ILRepack..." Importance="high" />
-	<Exec WorkingDirectory="$(OutputPath)" Command="ilrepack --lib:&quot;$(GameLibsPath)&quot; --out:$(AssemblyName).dll $(AssemblyName).dll @(AssembliesToMerge->'%(Filename)%(Extension)',' ')" />
-	<Message Text="Copying $(AssemblyName).dll to Mods folder: $(ModPath)" Importance="high" />
-	<Copy SourceFiles="$(BuildedAssembly)" DestinationFolder="$(ModPath)" />
+    <PropertyGroup>
+      <BuildedAssembly>$(OutputPath)$(AssemblyName).dll</BuildedAssembly>
+      <!-- CHANGE: ModPath is now built dynamically from a global path and the project name -->
+      <ModPath>$(ModsDevPath)\$(AssemblyName)</ModPath>
+    </PropertyGroup>
+    <ItemGroup>
+      <AssembliesToMerge Include="$(OutputPath)PLib.dll">
+        <InProject>false</InProject>
+        <Visible>false</Visible>
+      </AssembliesToMerge>
+    </ItemGroup>
+    <Message Text="Merging assemblies with ILRepack..." Importance="high" />
+    <Exec WorkingDirectory="$(OutputPath)" Command="ilrepack --lib:&quot;$(GameLibsPath)&quot; --out:$(AssemblyName).dll $(AssemblyName).dll @(AssembliesToMerge->'%(Filename)%(Extension)',' ')" />
+    <Message Text="Copying $(AssemblyName).dll to Mods folder: $(ModPath)" Importance="high" />
+    <Copy SourceFiles="$(BuildedAssembly)" DestinationFolder="$(ModPath)" />
   </Target>
 </Project>
